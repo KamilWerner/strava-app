@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form _self %}
+
+{% block form_errors %}
+	{% if errors|length > 0 %}
+		<div class="form-error">
+			Errors:
+			<ul>
+				{% for error in errors %}
+					<li>{{ error.message }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+{% endblock %}
+
+{% block form_row %}
+	{{ form_label(form) }}
+	{{ form_widget(form) }}
+	{{ form_errors(form) }}
+{% endblock %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block pageTitle %}Sign up{% endblock %}
+
+{% block leftColumnContent %}
+	{{ form_start(form) }}
+	{{ form_row(form.name) }}
+	{{ form_row(form.surname) }}
+	{{ form_row(form.email) }}
+	{{ form_row(form.password) }}
+	{{ form_row(form.save) }}
+	{{ form_end(form) }}
+
+	<div class="sign-up-message">
+		Or <a href="{{ path('user_sign_in') }}">sign in</a> if you already have an account.
+	</div>
+{% endblock %}
+
+{% block rightColumnContent %}
+	<div class="right-column-cover">
+		<div class="right-column-mask"></div>
+	</div>
+{% endblock %}

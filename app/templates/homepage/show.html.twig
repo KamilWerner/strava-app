@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block pageTitle %}Homepage{% endblock %}
+
+{% block leftColumnContent %}
+	<h4>Welcome {{ app.user.name }} {{ app.user.surname }}!</h4>
+
+	<a href="{{ path('user_logout') }}">Logout!</a>
+{% endblock %}
+
+{% block rightColumnContent %}
+	<div id="map-section"></div>
+{% endblock %}

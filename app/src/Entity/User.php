@@ -1,0 +1,205 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Entity;
+
+use App\Repository\UserRepository;
+use DateTime;
+use DateTimeInterface;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity("email")
+ */
+class User implements UserInterface
+{
+	private const ROLE_USER = 'ROLE_USER';
+
+    /**
+	 * @var int|null
+	 *
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+	 * @var string
+	 *
+     * @ORM\Column(type="string", length=180, unique=true)
+	 *
+	 * @Assert\Email
+     */
+    private $email = '';
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="string", length=100)
+	 *
+	 * @Assert\NotBlank
+	 */
+    private $name = '';
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="string", length=100)
+	 *
+	 * @Assert\NotBlank
+	 */
+    private $surname = '';
+
+    /**
+	 * @var string[]
+	 *
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
+     * @var string
+	 *
+     * @ORM\Column(type="string")
+	 *
+	 * @Assert\NotBlank
+     */
+    private $password = '';
+
+	/**
+	 * @var DateTimeInterface
+	 *
+	 * @ORM\Column(type="datetime")
+	 */
+    private $registeredAt;
+
+	/**
+	 * @var DateTimeInterface
+	 *
+	 * @ORM\Column(type="datetime", nullable=true)
+	 */
+    private $lastLoginAt;
+
+    public function __construct()
+	{
+		$this->registeredAt = new DateTime();
+	}
+
+	public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getName(): string
+	{
+		return $this->name;
+	}
+
+	public function setName(string $name): self
+	{
+		$this->name = $name;
+
+		return $this;
+	}
+
+	public function getSurname(): string
+	{
+		return $this->surname;
+	}
+
+	public function setSurname(string $surname): self
+	{
+		$this->surname = $surname;
+
+		return $this;
+	}
+
+    public function getUsername(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+
+        // guarantee every user at least has ROLE_USER
+        $roles[] = self::ROLE_USER;
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getRegisteredAt(): DateTimeInterface
+	{
+		return $this->registeredAt;
+	}
+
+	public function getLastLoginAt(): DateTimeInterface
+	{
+		return $this->lastLoginAt;
+	}
+
+	public function setLastLoginAt(DateTimeInterface $lastLoginAt): self
+	{
+		$this->lastLoginAt = $lastLoginAt;
+
+		return $this;
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+	/**
+	 * {@inheritdoc}
+	 */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+}

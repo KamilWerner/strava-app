@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sign in{% endblock %}
+
+{% block pageTitle %}Sign in{% endblock %}
+
+{% block leftColumnContent %}
+    <form method="post">
+        {% if error %}
+            <div class="form-error">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        {% endif %}
+
+        <label for="input-email">Email</label>
+        <input
+            type="email"
+            value="{{ last_username }}"
+            name="email"
+            id="input-email"
+            class="form-control"
+            required
+            autofocus
+        >
+
+        <label for="input-password">Password</label>
+        <input
+            type="password"
+            name="password"
+            id="input-password"
+            class="form-control"
+            required
+        >
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        <button type="submit">Sign in</button>
+    </form>
+
+    <div class="sign-up-message">
+        Or <a href="{{ path('user_sign_up') }}">sign up</a> if you don't have an account.
+    </div>
+{% endblock %}
+
+{% block rightColumnContent %}
+    <div class="right-column-cover">
+        <div class="right-column-mask"></div>
+    </div>
+{% endblock %}

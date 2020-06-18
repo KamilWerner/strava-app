@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
+
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	font-family: 'Lato', sans-serif;
+}
+
+.sf-toolbar * {
+	font-family: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	font-weight: 300;
+	cursor: default;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+.front-page {
+	width: 100%;
+	height: 100vh;
+	display: grid;
+	grid-template-columns: 30% 70%;
+}
+
+.front-page .right-column-cover {
+	width: 100%;
+	height: 100%;
+	background-image: url('/img/bike-road.jpg');
+	background-size: cover;
+	background-position: 55%;
+}
+
+.right-column-cover .right-column-mask {
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.front-page .left-column {
+	padding: 5px 15px;
+	position: relative;
+}
+
+.left-column .title-section {
+	display: grid;
+	grid-template-columns: min-content auto;
+	grid-gap: 10px;
+	align-items: center;
+	margin-bottom: 50px;
+}
+
+.title-section img {
+	width: 65px;
+}
+
+.title-section h2 {
+	font-size: 35px;
+}
+
+.front-page-content h3 {
+	font-size: 25px;
+}
+
+.front-page-content form {
+	display: grid;
+	grid-template-columns: min-content auto;
+	grid-gap: 10px 5px;
+	align-items: center;
+	margin: 20px 0;
+}
+
+.front-page-content form label {
+	font-size: 14px;
+	white-space: nowrap;
+}
+
+.front-page-content form input[type="email"],
+.front-page-content form input[type="password"],
+.front-page-content form input[type="text"] {
+	padding: 5px;
+	outline: none;
+	border: 1px solid #ddd;
+	transition: background-color 0.5s;
+	-webkit-transition: background-color 0.5s;
+}
+
+.front-page-content form input[type="email"]:focus,
+.front-page-content form input[type="password"]:focus,
+.front-page-content form input[type="text"]:focus {
+	background-color: #f1f2f3;
+}
+
+.front-page-content form button[type="submit"] {
+	border: none;
+	padding: 5px;
+	background: #252525;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 11px;
+	cursor: pointer;
+	font-weight: 700;
+}
+
+.front-page-content .sign-up-message {
+	font-size: 13px;
+	cursor: default;
+}
+
+.front-page-content .sign-up-message a {
+	color: indianred;
+}
+
+.front-page-content .sign-up-message a:hover {
+	color: #c33d3d;
+}
+
+.left-column .copyright-text {
+	position: absolute;
+	bottom: 5px;
+	left: 15px;
+	font-size: 10px;
+	cursor: default;
+}
+
+.front-page-content form .form-error {
+	grid-column: 1 / -1;
+	background: #c33d3d;
+	color: #fff;
+	padding: 5px;
+	font-size: 13px;
+}
+
+.front-page-content form .form-error ul {
+	margin: 0;
+	list-style-type: square;
+	padding: 0 20px;
+}
+
+.flash-messages-container {
+	position: fixed;
+	top: 30px;
+	left: 50%;
+	transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	width: 35vw;
+}
+
+.flash-messages-container .flash-message {
+	position: relative;
+	margin-bottom: 10px;
+	padding: 5px;
+	font-size: 14px;
+	color: #fff;
+	cursor: default;
+}
+
+.flash-messages-container .flash-notice {
+	background: #55d07b;
+}
+
+.flash-messages-container .flash-warning {
+	background: #2994ad;
+}
+
+.flash-messages-container .flash-error {
+	background: #c33d3d;
+}
+
+.flash-messages-container .flash-message-exit {
+	position: absolute;
+	top: 2px;
+	right: 5px;
+	font-size: 20px;
+	color: #fff;
+}
+
+.right-column #map-section {
+	width: 100%;
+	height: 100%;
+}
