@@ -77,7 +77,6 @@ $(function () {
 	});
 
 	const map = L.map('map-section', {
-		zoomControl: true,
 		center: [54.34766, 18.64542],
 		zoom: 10,
 		layers: [cyclosm]
@@ -98,4 +97,26 @@ $(function () {
 	};
 
 	L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+	const geocoder = L.Control.geocoder({
+		defaultMarkGeocode: false,
+		position: 'topleft'
+	}).addTo(map);
+
+	geocoder.on('markgeocode', function(e) {
+		map.fitBounds(e.geocode.bbox);
+	});
+
+	geocoder.addTo(map);
+
+	L.control.locate().addTo(map);
+	L.control.scale().addTo(map);
+
+	L.easyButton(
+		'fa-question',
+		function(btn, map) {
+			window.open('https://www.cyclosm.org/legend.html', '_blank');
+		},
+		'Legend'
+	).addTo(map);
 });
