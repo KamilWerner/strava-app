@@ -76,6 +76,26 @@ $(function () {
 		maxZoom: 20,
 	});
 
+	const openWeatherClouds = L.tileLayer('https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=86cae98d04a38167cbd69a31d0581d53', {
+		attribution: '<a href="https://openweathermap.org">Open Weather Map</a>',
+		maxZoom: 20,
+	});
+
+	const openWeatherPrecipitation = L.tileLayer('https://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=86cae98d04a38167cbd69a31d0581d53', {
+		attribution: '<a href="https://openweathermap.org">Open Weather Map</a>',
+		maxZoom: 20,
+	});
+
+	const openWeatherWindSpeed = L.tileLayer('https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=86cae98d04a38167cbd69a31d0581d53', {
+		attribution: '<a href="https://openweathermap.org">Open Weather Map</a>',
+		maxZoom: 20,
+	});
+
+	const openWeatherTemperature = L.tileLayer('https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=86cae98d04a38167cbd69a31d0581d53', {
+		attribution: '<a href="https://openweathermap.org">Open Weather Map</a>',
+		maxZoom: 20,
+	});
+
 	const map = L.map('map-section', {
 		center: [54.34766, 18.64542],
 		zoom: 10,
@@ -93,7 +113,11 @@ $(function () {
 
 	const overlayMaps = {
 		'Waymarked Trails': waymarkedTrails,
-		'CyclOSM Lite': cyclosmLite
+		'CyclOSM Lite': cyclosmLite,
+		'Open Weather Clouds': openWeatherClouds,
+		'Open Weather Precipitation': openWeatherPrecipitation,
+		'Open Weather Wind Speed': openWeatherWindSpeed,
+		'Open Weather Temperature': openWeatherTemperature
 	};
 
 	L.control.layers(baseMaps, overlayMaps).addTo(map);
