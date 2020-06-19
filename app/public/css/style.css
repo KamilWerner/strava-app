@@ -185,3 +185,33 @@ a {
 	width: 100%;
 	height: 100%;
 }
+
+.left-column .map-legend-section {
+	margin-top: 20px;
+}
+
+.map-legend-section .map-legend-container {
+	height: 50vh;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+.map-legend-section .map-legend-container h3 {
+	font-size: 15px;
+	font-weight: 500;
+	margin-top: 10px;
+}
+
+.map-legend-section .map-legend-container table {
+	font-size: 12px;
+}
+
+.map-legend-section .map-legend-container table tr > td:first-child {
+	padding-right: 1em;
+	text-align: center;
+	width: 2em;
+}
+
+.left-column .map-legend table img {
+	max-height: 16px;
+}

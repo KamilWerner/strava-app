@@ -135,12 +135,4 @@ $(function () {
 
 	L.control.locate().addTo(map);
 	L.control.scale().addTo(map);
-
-	L.easyButton(
-		'fa-question',
-		function(btn, map) {
-			window.open('https://www.cyclosm.org/legend.html', '_blank');
-		},
-		'Legend'
-	).addTo(map);
 });

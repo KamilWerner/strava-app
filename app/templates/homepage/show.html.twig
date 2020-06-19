@@ -8,6 +8,8 @@
 	<h4>Welcome {{ app.user.name }} {{ app.user.surname }}!</h4>
 
 	<a href="{{ path('user_logout') }}">Logout!</a>
+
+	{% include 'legend.html.twig' only %}
 {% endblock %}
 
 {% block rightColumnContent %}
