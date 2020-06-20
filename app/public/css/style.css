@@ -150,6 +150,7 @@ a {
 	transform: translateX(-50%);
 	-webkit-transform: translateX(-50%);
 	width: 35vw;
+	z-index: 9999;
 }
 
 .flash-messages-container .flash-message {
@@ -214,4 +215,8 @@ a {
 
 .left-column .map-legend table img {
 	max-height: 16px;
+}
+
+.connect-with-strava-button img {
+	width: 100%;
 }

@@ -73,6 +73,20 @@ class User implements UserInterface
     private $password = '';
 
 	/**
+	 * @var StravaIntegration
+	 *
+	 * @ORM\Embedded(class="StravaIntegration", columnPrefix="strava_integration_")
+	 */
+    private $stravaIntegration;
+
+	/**
+	 * @var StravaAthlete
+	 *
+	 * @ORM\Embedded(class="StravaAthlete", columnPrefix="strava_athlete_")
+	 */
+    private $stravaAthlete;
+
+	/**
 	 * @var DateTimeInterface
 	 *
 	 * @ORM\Column(type="datetime")
@@ -88,6 +102,8 @@ class User implements UserInterface
 
     public function __construct()
 	{
+		$this->stravaIntegration = new StravaIntegration();
+		$this->stravaAthlete = new StravaAthlete();
 		$this->registeredAt = new DateTime();
 	}
 
@@ -168,6 +184,16 @@ class User implements UserInterface
 
         return $this;
     }
+
+	public function getStravaIntegration(): StravaIntegration
+	{
+		return $this->stravaIntegration;
+	}
+
+	public function getStravaAthlete(): StravaAthlete
+	{
+		return $this->stravaAthlete;
+	}
 
     public function getRegisteredAt(): DateTimeInterface
 	{

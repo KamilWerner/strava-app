@@ -1,0 +1,11 @@
+{% if not app.user.stravaIntegration.integrated %}
+	<a
+		href="http://www.strava.com/oauth/authorize?client_id=49924&response_type=code&redirect_uri=http://localhost/strava/exchange_token&approval_prompt=force&scope=read,activity:read"
+		class="connect-with-strava-button"
+	>
+		<img
+			src="{{ asset('img/connect-with-strava-button.png') }}"
+			alt="Connect with Strava button"
+		>
+	</a>
+{% endif %}
