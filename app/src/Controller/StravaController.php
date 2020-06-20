@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Service\ApiCaller\InvalidResponseStatusException;
+use App\Service\Strava\ExchangeTokenApiCaller;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,11 +22,12 @@ class StravaController extends AbstractController
 	/**
 	 * @Route("/strava/exchange_token")
 	 *
-	 * @param Request $request
+	 * @param Request                $request
+	 * @param ExchangeTokenApiCaller $apiCaller
 	 *
 	 * @return RedirectResponse
 	 */
-	public function exchangeTokenAction(Request $request): RedirectResponse
+	public function exchangeTokenAction(Request $request, ExchangeTokenApiCaller $apiCaller): RedirectResponse
 	{
 		if ($this->getUser()->getStravaIntegration()->isIntegrated()) {
 			$this->addError('You are already integrated with Strava!');
@@ -51,22 +53,11 @@ class StravaController extends AbstractController
 			return $this->redirectToRoute('homepage');
 		}
 
-		$client = HttpClient::create();
+		$apiCaller->setAuthorizationCode($request->query->get('code'));
 
-		$response = $client->request(
-			'POST',
-			'https://www.strava.com/oauth/token',
-			[
-				'body' => [
-					'client_id' => '49924',
-					'client_secret' => '40e934853ab4405a354a47fa7508aa549aed2ac0',
-					'code' => $request->query->get('code'),
-					'grant_type' => 'authorization_code',
-				],
-			]
-		);
-
-		if (200 !== $response->getStatusCode()) {
+		try {
+			$response = $apiCaller->call();
+		} catch (InvalidResponseStatusException $e) {
 			$this->addError('Invalid response from Strava… try again later!');
 
 			return $this->redirectToRoute('homepage');
