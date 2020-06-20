@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Security;
 
 use App\Entity\User;
+use App\Service\Strava\TokenRefresher;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -49,16 +50,23 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 	 */
     private $passwordEncoder;
 
+	/**
+	 * @var TokenRefresher
+	 */
+    private $tokenRefresher;
+
     public function __construct(
     	EntityManagerInterface $entityManager,
 		UrlGeneratorInterface $urlGenerator,
 		CsrfTokenManagerInterface $csrfTokenManager,
-		UserPasswordEncoderInterface $passwordEncoder
+		UserPasswordEncoderInterface $passwordEncoder,
+		TokenRefresher $tokenRefresher
 	) {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->tokenRefresher = $tokenRefresher;
     }
 
     public function supports(Request $request)
@@ -114,9 +122,15 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-    	$token->getUser()->setLastLoginAt(new DateTime());
+        $user = $token->getUser();
 
-    	$this->entityManager->flush();
+        $user->setLastLoginAt(new DateTime());
+
+        if ($user->getStravaIntegration()->isAccessTokenExpired()) {
+	        $this->tokenRefresher->refresh();
+	    }
+
+        $this->entityManager->flush();
 
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);

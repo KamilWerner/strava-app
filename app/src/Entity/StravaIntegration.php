@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -72,5 +73,10 @@ class StravaIntegration
 	public function isIntegrated(): bool
 	{
 		return $this->accessToken && $this->refreshToken;
+	}
+
+	public function isAccessTokenExpired(): bool
+	{
+		return $this->isIntegrated() && $this->accessTokenExpiresAt < new DateTime();
 	}
 }
