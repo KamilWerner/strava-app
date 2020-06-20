@@ -6,7 +6,7 @@ namespace App\Service\Strava;
 
 class RefreshTokenAbstractApiCaller extends AuthorizationAbstractApiCaller
 {
-	private const AUTH_GRANT_TYPE_REFRESH = 'authorization_code';
+	private const AUTH_GRANT_TYPE_REFRESH = 'refresh_token';
 
 	/**
 	 * @var string|null
