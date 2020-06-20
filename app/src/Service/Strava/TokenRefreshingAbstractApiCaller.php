@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Service\Strava;
 
-use App\Service\ApiCaller\ResponseStatusValidatingAbstractApiCaller;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
-abstract class TokenRefreshingAbstractApiCaller extends ResponseStatusValidatingAbstractApiCaller
+abstract class TokenRefreshingAbstractApiCaller extends BaseAbstractApiCaller
 {
 	/**
 	 * @var TokenRefresher

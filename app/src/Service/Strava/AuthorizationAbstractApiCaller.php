@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace App\Service\Strava;
 
-use App\Service\ApiCaller\ResponseStatusValidatingAbstractApiCaller;
-
-abstract class AuthorizationAbstractApiCaller extends ResponseStatusValidatingAbstractApiCaller
+abstract class AuthorizationAbstractApiCaller extends BaseAbstractApiCaller
 {
-	private const REQUEST_URL = 'https://www.strava.com/oauth/token';
+	private const STRAVA_API_AUTHORIZATION_PATH = '/oauth/token';
 
 	protected const APP_ID = '49924';
 	protected const APP_SECRET = '40e934853ab4405a354a47fa7508aa549aed2ac0';
@@ -18,8 +16,8 @@ abstract class AuthorizationAbstractApiCaller extends ResponseStatusValidatingAb
 		return self::REQUEST_METHOD_POST;
 	}
 
-	protected function getUrl(): string
+	protected function getPath(): string
 	{
-		return self::REQUEST_URL;
+		return self::STRAVA_API_AUTHORIZATION_PATH;
 	}
 }
