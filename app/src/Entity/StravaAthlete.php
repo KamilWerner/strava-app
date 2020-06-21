@@ -25,6 +25,20 @@ class StravaAthlete
 	 */
 	private $thumbUrl;
 
+	/**
+	 * @var float|null
+	 *
+	 * @ORM\Column(type="float", nullable=true)
+	 */
+	private $biggestRideDistance;
+
+	/**
+	 * @var float|null
+	 *
+	 * @ORM\Column(type="float", nullable=true)
+	 */
+	private $totalRideDistance;
+
 	public function getId(): ?int
 	{
 		return $this->id;
@@ -45,6 +59,30 @@ class StravaAthlete
 	public function setThumbUrl(string $thumbUrl): self
 	{
 		$this->thumbUrl = $thumbUrl;
+
+		return $this;
+	}
+
+	public function getBiggestRideDistance(): ?float
+	{
+		return $this->biggestRideDistance;
+	}
+
+	public function setBiggestRideDistance(float $biggestRideDistance): self
+	{
+		$this->biggestRideDistance = $biggestRideDistance;
+
+		return $this;
+	}
+
+	public function getTotalRideDistance(): ?float
+	{
+		return $this->totalRideDistance;
+	}
+
+	public function setTotalRideDistance(float $totalRideDistance): self
+	{
+		$this->totalRideDistance = $totalRideDistance;
 
 		return $this;
 	}

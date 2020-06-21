@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Service\ApiCaller\InvalidResponseStatusException;
+use App\Service\Strava\StatsUpdater;
 use App\Service\Strava\TokenExchanger;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -23,11 +24,15 @@ class StravaController extends AbstractController
 	 *
 	 * @param Request        $request
 	 * @param TokenExchanger $tokenExchanger
+	 * @param StatsUpdater   $statsUpdater
 	 *
 	 * @return RedirectResponse
 	 */
-	public function exchangeTokenAction(Request $request, TokenExchanger $tokenExchanger): RedirectResponse
-	{
+	public function exchangeTokenAction(
+		Request $request,
+		TokenExchanger $tokenExchanger,
+		StatsUpdater $statsUpdater
+	): RedirectResponse {
 		if ($this->getUser()->getStravaIntegration()->isIntegrated()) {
 			$this->addError('You are already integrated with Strava!');
 
@@ -54,6 +59,7 @@ class StravaController extends AbstractController
 
 		try {
 			$tokenExchanger->exchange($request->query->get('code'));
+			$statsUpdater->update();
 		} catch (InvalidResponseStatusException $e) {
 			$this->addError('Invalid response from Strava… try again later!');
 
