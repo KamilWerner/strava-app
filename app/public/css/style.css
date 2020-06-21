@@ -193,7 +193,7 @@ a {
 }
 
 .map-legend-section .map-legend-container {
-	height: 50vh;
+	height: 49vh;
 	overflow-x: hidden;
 	overflow-y: scroll;
 }
@@ -273,23 +273,24 @@ a {
 .not-integrated-account-details .account-info-section a,
 .integrated-account-details .account-info-section .account-info-name a {
 	background: #ddd;
-	color: #fff;
+	color: #252525;
 	padding: 3px;
 	font-size: 12px;
-	font-weight: 600;
+	font-weight: 400;
+	text-align: center;
+	width: 60px;
 	transition: all 500ms;
 	-webkit-transition: all 500ms;
 }
 
 .integrated-account-details .account-info-section .account-info-name a {
 	display: block;
-	text-align: center;
-	width: 50px;
 }
 
 .not-integrated-account-details .account-info-section a:hover,
 .integrated-account-details .account-info-section .account-info-name a:hover {
 	background: #252525;
+	color: #ddd;
 }
 
 .not-integrated-account-details .account-integration-section,
@@ -343,4 +344,22 @@ a {
 
 .integrated-account-details .activities-info-section dd {
 	margin: 0;
+}
+
+.left-column .menu-section {
+	margin-top: 20px;
+}
+
+.menu-section .menu-option {
+	background: #ddd;
+	color: #252525;
+	padding: 4px;
+	font-size: 12px;
+	transition: all 500ms;
+	-webkit-transition: all 500ms;
+}
+
+.menu-section .menu-option:hover {
+	background: #252525;
+	color: #ddd;
 }
