@@ -1,7 +1,43 @@
 {% if app.user %}
-	<h4>Welcome {{ app.user.name }} {{ app.user.surname }}!</h4>
+	{% if app.user.stravaIntegration.integrated %}
+		<div class="integrated-account-details">
+			<div class="account-info-section">
+				<div
+					class="account-info-avatar"
+					style="background-image: url('{{ app.user.stravaAthlete.thumbUrl }}');"
+				></div>
 
-	{% include 'stravaIntegrationLink.html.twig' only %}
+				<div class="account-info-name">
+					Hi, {{ app.user.name }} {{ app.user.surname }}
+					<a href="{{ path('user_logout') }}">Logout</a>
+				</div>
+			</div>
 
-	<a href="{{ path('user_logout') }}">Logout!</a>
+			<div class="activities-info-section">
+				<dl>
+					<dt>Activities count:</dt>
+					<dd>{{ app.user.activities|length }}</dd>
+					<dt>Biggest ride distance:</dt>
+					<dd>{{ app.user.stravaAthlete.biggestRideDistance|meters_to_kilometers }}</dd>
+					<dt>Total ride distance:</dt>
+					<dd>{{ app.user.stravaAthlete.totalRideDistance|meters_to_kilometers }}</dd>
+				</dl>
+			</div>
+		</div>
+	{% else %}
+		<div class="not-integrated-account-details">
+			<div class="account-info-section">
+				Hi, {{ app.user.name }} {{ app.user.surname }}!
+				<a href="{{ path('user_logout') }}">Logout</a>
+			</div>
+
+			<div class="account-integration-section">
+				It looks like your account is not integrated with Strava yet… 😱<br />
+				If you want to access all features, just click the link below
+				and log in to Strava account ↓↓↓
+
+				{% include 'stravaIntegrationLink.html.twig' only %}
+			</div>
+		</div>
+	{% endif %}
 {% endif %}

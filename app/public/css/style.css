@@ -52,7 +52,7 @@ a {
 	display: grid;
 	grid-template-columns: min-content auto;
 	grid-gap: 5px;
-	align-items: center;
+	align-items: baseline;
 	margin-bottom: 15px;
 }
 
@@ -257,4 +257,90 @@ a {
 
 .show-hide-section.hidden-section .show-hide-element {
 	height: 0;
+}
+
+.not-integrated-account-details .account-info-section {
+	font-size: 15px;
+	font-weight: 300;
+	cursor: default;
+	display: grid;
+	grid-template-columns: auto min-content;
+	grid-gap: 3px;
+	align-items: center;
+	justify-content: start;
+}
+
+.not-integrated-account-details .account-info-section a,
+.integrated-account-details .account-info-section .account-info-name a {
+	background: #ddd;
+	color: #fff;
+	padding: 3px;
+	font-size: 12px;
+	font-weight: 600;
+	transition: all 500ms;
+	-webkit-transition: all 500ms;
+}
+
+.integrated-account-details .account-info-section .account-info-name a {
+	display: block;
+	text-align: center;
+	width: 50px;
+}
+
+.not-integrated-account-details .account-info-section a:hover,
+.integrated-account-details .account-info-section .account-info-name a:hover {
+	background: #252525;
+}
+
+.not-integrated-account-details .account-integration-section,
+.integrated-account-details .activities-info-section {
+	font-size: 12px;
+	line-height: 140%;
+	margin-top: 5px;
+	padding: 5px;
+	background: #ddd;
+	cursor: default;
+}
+
+.integrated-account-details .activities-info-section {
+	margin-top: 10px;
+}
+
+.not-integrated-account-details .account-integration-section .connect-with-strava-button {
+	display: block;
+	margin-top: 5px;
+	width: 150px;
+}
+
+.integrated-account-details .account-info-section {
+	display: grid;
+	grid-template-columns: min-content auto;
+	grid-gap: 5px;
+	align-items: center;
+}
+
+.integrated-account-details .account-info-section .account-info-avatar {
+	width: 50px;
+	height: 50px;
+	border-radius: 100px;
+	background-size: cover;
+	background-position: center;
+}
+
+.integrated-account-details .account-info-section .account-info-name {
+	font-size: 15px;
+	font-weight: 300;
+	cursor: default;
+}
+
+.integrated-account-details .activities-info-section dl {
+	margin: 0;
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-gap: 0 5px;
+	justify-content: start;
+}
+
+.integrated-account-details .activities-info-section dd {
+	margin: 0;
 }
