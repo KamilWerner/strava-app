@@ -50,15 +50,9 @@
 
                 {% include 'userAccountDetails.html.twig' only %}
 
-                {% if pageTitle is defined and pageTitle %}
-                    <h3>{{ pageTitle }}</h3>
-                {% endif %}
-
                 <div class="left-column-content">
                     {% block leftColumnContent %}{% endblock %}
                 </div>
-
-                {% include 'stravaIntegrationLink.html.twig' only %}
 
                 <div class="copyright-text">© 2020 Strava app by Kamil Werner</div>
             </div>
