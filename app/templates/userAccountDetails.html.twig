@@ -1,0 +1,5 @@
+{% if app.user %}
+	<h4>Welcome {{ app.user.name }} {{ app.user.surname }}!</h4>
+
+	<a href="{{ path('user_logout') }}">Logout!</a>
+{% endif %}

@@ -48,9 +48,11 @@
                     <h2>Strava app</h2>
                 </div>
 
-                <div class="front-page-content">
-                    <h3>{% block pageTitle %}{% endblock %}</h3>
+                {% include 'userAccountDetails.html.twig' only %}
 
+                <h3>{% block pageTitle %}{% endblock %}</h3>
+
+                <div class="left-column-content">
                     {% block leftColumnContent %}{% endblock %}
                 </div>
 

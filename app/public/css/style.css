@@ -64,11 +64,11 @@ a {
 	font-size: 35px;
 }
 
-.front-page-content h3 {
+.left-column-content h3 {
 	font-size: 25px;
 }
 
-.front-page-content form {
+.left-column-content form {
 	display: grid;
 	grid-template-columns: min-content auto;
 	grid-gap: 10px 5px;
@@ -76,14 +76,14 @@ a {
 	margin: 20px 0;
 }
 
-.front-page-content form label {
+.left-column-content form label {
 	font-size: 14px;
 	white-space: nowrap;
 }
 
-.front-page-content form input[type="email"],
-.front-page-content form input[type="password"],
-.front-page-content form input[type="text"] {
+.left-column-content form input[type="email"],
+.left-column-content form input[type="password"],
+.left-column-content form input[type="text"] {
 	padding: 5px;
 	outline: none;
 	border: 1px solid #ddd;
@@ -91,13 +91,13 @@ a {
 	-webkit-transition: background-color 0.5s;
 }
 
-.front-page-content form input[type="email"]:focus,
-.front-page-content form input[type="password"]:focus,
-.front-page-content form input[type="text"]:focus {
+.left-column-content form input[type="email"]:focus,
+.left-column-content form input[type="password"]:focus,
+.left-column-content form input[type="text"]:focus {
 	background-color: #f1f2f3;
 }
 
-.front-page-content form button[type="submit"] {
+.left-column-content form button[type="submit"] {
 	border: none;
 	padding: 5px;
 	background: #252525;
@@ -108,16 +108,16 @@ a {
 	font-weight: 700;
 }
 
-.front-page-content .sign-up-message {
+.left-column-content .sign-up-message {
 	font-size: 13px;
 	cursor: default;
 }
 
-.front-page-content .sign-up-message a {
+.left-column-content .sign-up-message a {
 	color: indianred;
 }
 
-.front-page-content .sign-up-message a:hover {
+.left-column-content .sign-up-message a:hover {
 	color: #c33d3d;
 }
 
@@ -129,7 +129,7 @@ a {
 	cursor: default;
 }
 
-.front-page-content form .form-error {
+.left-column-content form .form-error {
 	grid-column: 1 / -1;
 	background: #c33d3d;
 	color: #fff;
@@ -137,7 +137,7 @@ a {
 	font-size: 13px;
 }
 
-.front-page-content form .form-error ul {
+.left-column-content form .form-error ul {
 	margin: 0;
 	list-style-type: square;
 	padding: 0 20px;
