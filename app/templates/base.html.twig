@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
 
-        <title>Strava App - {% block title %}Welcome{% endblock %}</title>
+        <title>Strava App - {{ pageTitle ?? 'Welcome' }}</title>
 
         <link rel="icon" href="{{ asset('img/icon.png') }}">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -50,7 +50,9 @@
 
                 {% include 'userAccountDetails.html.twig' only %}
 
-                <h3>{% block pageTitle %}{% endblock %}</h3>
+                {% if pageTitle is defined and pageTitle %}
+                    <h3>{{ pageTitle }}</h3>
+                {% endif %}
 
                 <div class="left-column-content">
                     {% block leftColumnContent %}{% endblock %}

@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% set pageTitle = 'Sign up' %}
+
 {% form_theme form _self %}
 
 {% block form_errors %}
@@ -20,10 +22,6 @@
 	{{ form_widget(form) }}
 	{{ form_errors(form) }}
 {% endblock %}
-
-{% block title %}Sign up{% endblock %}
-
-{% block pageTitle %}Sign up{% endblock %}
 
 {% block leftColumnContent %}
 	{{ form_start(form) }}

@@ -51,17 +51,18 @@ a {
 .left-column .title-section {
 	display: grid;
 	grid-template-columns: min-content auto;
-	grid-gap: 10px;
+	grid-gap: 5px;
 	align-items: center;
-	margin-bottom: 50px;
+	margin-bottom: 15px;
 }
 
 .title-section img {
-	width: 65px;
+	width: 35px;
 }
 
 .title-section h2 {
-	font-size: 35px;
+	font-size: 25px;
+	line-height: 25px;
 }
 
 .left-column-content h3 {
