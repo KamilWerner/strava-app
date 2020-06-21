@@ -7,6 +7,8 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use DateTime;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -100,11 +102,19 @@ class User implements UserInterface
 	 */
     private $lastLoginAt;
 
+    /**
+	 * @var Collection|Activity[]
+	 *
+     * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="user")
+     */
+    private $activities;
+
     public function __construct()
 	{
 		$this->stravaIntegration = new StravaIntegration();
 		$this->stravaAthlete = new StravaAthlete();
 		$this->registeredAt = new DateTime();
+		$this->activities = new ArrayCollection();
 	}
 
 	public function getId(): ?int
@@ -227,5 +237,37 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Activity[]
+     */
+    public function getActivities(): Collection
+    {
+        return $this->activities;
+    }
+
+    public function addActivity(Activity $activity): self
+    {
+        if (!$this->activities->contains($activity)) {
+            $this->activities[] = $activity;
+            $activity->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActivity(Activity $activity): self
+    {
+        if ($this->activities->contains($activity)) {
+            $this->activities->removeElement($activity);
+
+            // set the owning side to null (unless already changed)
+            if ($activity->getUser() === $this) {
+                $activity->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
