@@ -136,3 +136,13 @@ $(function () {
 	L.control.locate().addTo(map);
 	L.control.scale().addTo(map);
 });
+
+$(function () {
+	$('.show-hide-button').click(function (e) {
+		e.preventDefault();
+
+		$(this)
+			.parents('.show-hide-section')
+			.toggleClass('hidden-section');
+	});
+});

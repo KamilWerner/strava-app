@@ -221,3 +221,40 @@ a {
 .connect-with-strava-button img {
 	width: 100%;
 }
+
+.show-hide-section {
+	position: relative;
+}
+
+.show-hide-section .show-hide-button {
+	position: absolute;
+	top: 3px;
+	right: 0;
+	background: #ddd;
+	color: #fff;
+	padding: 2px 5px;
+	font-weight: 900;
+	transition: all 500ms;
+	-webkit-transition: all 500ms;
+}
+
+.show-hide-section .show-hide-button:hover {
+	background: #252525;
+}
+
+.show-hide-section .show-hide-button:before {
+	content: '↑';
+}
+
+.show-hide-section.hidden-section .show-hide-button:before {
+	content: '↓';
+}
+
+.show-hide-section .show-hide-element {
+	transition: all 500ms;
+	-webkit-transition: all 500ms;
+}
+
+.show-hide-section.hidden-section .show-hide-element {
+	height: 0;
+}
