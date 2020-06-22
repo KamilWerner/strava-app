@@ -37,10 +37,13 @@ class StatsUpdater
 	public function update(): void
 	{
 		$responseData = $this->apiCaller->call()->toArray();
+
 		$user = $this->security->getUser();
 
-		$user->getStravaAthlete()->setBiggestRideDistance((float) $responseData['biggest_ride_distance']);
-		$user->getStravaAthlete()->setTotalRideDistance((float) $responseData['all_ride_totals']['distance']);
+		$user->getStravaAthlete()
+			->setBiggestRideDistance((float) $responseData['biggest_ride_distance'])
+			->setTotalRideDistance((float) $responseData['all_ride_totals']['distance'])
+			->setTotalElevationGain((float) $responseData['all_ride_totals']['elevation_gain']);
 
 		$this->entityManager->flush();
 	}

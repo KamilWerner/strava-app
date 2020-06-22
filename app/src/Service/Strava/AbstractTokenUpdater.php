@@ -40,13 +40,15 @@ abstract class AbstractTokenUpdater
 		$responseData = $this->apiCaller->call()->toArray();
 		$user = $this->security->getUser();
 
-		$user->getStravaIntegration()->setAccessToken($responseData['access_token']);
-		$user->getStravaIntegration()->setAccessTokenExpiresAt(new DateTime('@'.$responseData['expires_at']));
-		$user->getStravaIntegration()->setRefreshToken($responseData['refresh_token']);
+		$user->getStravaIntegration()
+			->setAccessToken($responseData['access_token'])
+			->setAccessTokenExpiresAt(new DateTime('@'.$responseData['expires_at']))
+			->setRefreshToken($responseData['refresh_token']);
 
 		if (isset($responseData['athlete'])) {
-			$user->getStravaAthlete()->setId((int)$responseData['athlete']['id']);
-			$user->getStravaAthlete()->setThumbUrl($responseData['athlete']['profile']);
+			$user->getStravaAthlete()
+				->setId((int)$responseData['athlete']['id'])
+				->setThumbUrl($responseData['athlete']['profile']);
 		}
 
 		$this->entityManager->flush();

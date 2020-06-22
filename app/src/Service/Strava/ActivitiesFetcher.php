@@ -44,6 +44,7 @@ class ActivitiesFetcher
 			$activity = new Activity();
 
 			$activity
+				->setOriginId($activityData['id'])
 				->setTitle($activityData['name'])
 				->setDistance((float) $activityData['distance'])
 				->setMovingTime((int) $activityData['moving_time'])
@@ -53,6 +54,8 @@ class ActivitiesFetcher
 				->setEncodedPolyline($activityData['map']['summary_polyline'])
 				->setAverageSpeed((float) $activityData['average_speed'])
 				->setMaxSpeed((float) $activityData['max_speed'])
+				->setHighElevation((float) $activityData['elev_high'])
+				->setLowElevation((float) $activityData['elev_low'])
 				->setUser($this->security->getUser());
 
 			$this->entityManager->persist($activity);

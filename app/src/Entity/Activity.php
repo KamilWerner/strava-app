@@ -23,6 +23,13 @@ class Activity
 	private $id;
 
 	/**
+	 * @var int|null
+	 *
+	 * @ORM\Column(type="bigint", nullable=true)
+	 */
+	private $originId;
+
+	/**
 	 * @var string|null
 	 *
 	 * @ORM\Column(type="string", length=300, nullable=true)
@@ -85,6 +92,20 @@ class Activity
 	 */
 	private $maxSpeed;
 
+	/**
+	 * @var float|null
+	 *
+	 * @ORM\Column(type="float", nullable=true)
+	 */
+	private $highElevation;
+
+	/**
+	 * @var float|null
+	 *
+	 * @ORM\Column(type="float", nullable=true)
+	 */
+	private $lowElevation;
+
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="activities")
      * @ORM\JoinColumn(nullable=false)
@@ -94,6 +115,18 @@ class Activity
 	public function getId(): ?int
 	{
 		return $this->id;
+	}
+
+	public function getOriginId(): ?int
+	{
+		return $this->originId;
+	}
+
+	public function setOriginId(int $originId): self
+	{
+		$this->originId = $originId;
+
+		return $this;
 	}
 
 	public function getTitle(): ?string
@@ -216,6 +249,30 @@ class Activity
 	public function setMaxSpeed(float $maxSpeed): self
 	{
 		$this->maxSpeed = $maxSpeed;
+
+		return $this;
+	}
+
+	public function getHighElevation(): ?float
+	{
+		return $this->highElevation;
+	}
+
+	public function setHighElevation(float $highElevation): self
+	{
+		$this->highElevation = $highElevation;
+
+		return $this;
+	}
+
+	public function getLowElevation(): ?float
+	{
+		return $this->lowElevation;
+	}
+
+	public function setLowElevation(float $lowElevation): self
+	{
+		$this->lowElevation = $lowElevation;
 
 		return $this;
 	}

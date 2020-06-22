@@ -39,6 +39,13 @@ class StravaAthlete
 	 */
 	private $totalRideDistance;
 
+	/**
+	 * @var float|null
+	 *
+	 * @ORM\Column(type="float", nullable=true)
+	 */
+	private $totalElevationGain;
+
 	public function getId(): ?int
 	{
 		return $this->id;
@@ -83,6 +90,18 @@ class StravaAthlete
 	public function setTotalRideDistance(float $totalRideDistance): self
 	{
 		$this->totalRideDistance = $totalRideDistance;
+
+		return $this;
+	}
+
+	public function getTotalElevationGain(): ?float
+	{
+		return $this->totalElevationGain;
+	}
+
+	public function setTotalElevationGain(float $totalElevationGain): self
+	{
+		$this->totalElevationGain = $totalElevationGain;
 
 		return $this;
 	}
