@@ -106,6 +106,13 @@ class Activity
 	 */
 	private $lowElevation;
 
+	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(type="boolean")
+	 */
+	private $public = false;
+
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="activities")
      * @ORM\JoinColumn(nullable=false)
@@ -273,6 +280,25 @@ class Activity
 	public function setLowElevation(float $lowElevation): self
 	{
 		$this->lowElevation = $lowElevation;
+
+		return $this;
+	}
+
+	public function getElevation(): float
+	{
+		return $this->highElevation && $this->lowElevation
+			? $this->highElevation - $this->lowElevation
+			: 0;
+	}
+
+	public function isPublic(): bool
+	{
+		return $this->public;
+	}
+
+	public function setPublic(bool $public): self
+	{
+		$this->public = $public;
 
 		return $this;
 	}

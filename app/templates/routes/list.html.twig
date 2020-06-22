@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block rightColumnContent %}
+	<div class="activities-section">
+		<h3>{{ pageTitle }}</h3>
+
+		<table cellspacing="0" cellpadding="0">
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>Title</th>
+					<th>Time</th>
+					<th>Distance</th>
+					<th>Elevation</th>
+					<th>Public</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for activity in activities %}
+					<tr>
+						<td>{{ activity.startAt|date }}</td>
+						<td>
+							<a href="#">{{ activity.title }}</a>
+						</td>
+						<td>{{ activity.movingTime|time_format }}</td>
+						<td>{{ activity.distance|meters_to_kilometers }}</td>
+						<td>{{ activity.elevation }} m</td>
+						<td>{{ activity.public ? 'Yes' : 'No' }}</td>
+						<td>
+							{% if isAuthUser %}
+								<a href="#">Edit</a>
+								| <a href="#">Publish</a>
+							{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}
