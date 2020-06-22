@@ -3,6 +3,10 @@
 {% set pageTitle = activity.title %}
 {% set loadMapAssets = true %}
 
+{% block leftColumnContent %}
+	{% include 'routes/infoSection.html.twig' with { activity: activity } only %}
+{% endblock %}
+
 {% block rightColumnContent %}
 	<div id="map-section">
 		<div

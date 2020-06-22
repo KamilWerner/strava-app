@@ -1,0 +1,22 @@
+<div class="route-info-section left-column-section">
+	<h2>Route: {{ activity.title }}</h2>
+
+	<dl>
+		<dt>Distance:</dt>
+		<dd>{{ activity.distance|meters_to_kilometers }}</dd>
+		<dt>Moving time:</dt>
+		<dd>{{ activity.movingTime|time_format }}</dd>
+		<dt>Start at:</dt>
+		<dd>{{ activity.startAt|date }}</dd>
+		<dt>Average speed:</dt>
+		<dd>{{ activity.averageSpeed|meters_per_second_to_kilometers_per_hour }}</dd>
+		<dt>Max speed:</dt>
+		<dd>{{ activity.maxSpeed|meters_per_second_to_kilometers_per_hour }}</dd>
+		<dt>Elevation:</dt>
+		<dd>{{ activity.elevation }} m</dd>
+		<dt>High elevation:</dt>
+		<dd>{{ activity.highElevation }} m</dd>
+		<dt>Low elevation:</dt>
+		<dd>{{ activity.lowElevation }} m</dd>
+	</dl>
+</div>

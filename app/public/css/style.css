@@ -188,7 +188,7 @@ a {
 	height: 100%;
 }
 
-.left-column .map-legend-section {
+.left-column .left-column-section {
 	margin-top: 20px;
 }
 
@@ -338,8 +338,12 @@ a {
 	margin: 0;
 	display: grid;
 	grid-template-columns: auto auto;
-	grid-gap: 0 5px;
+	grid-gap: 3px 5px;
 	justify-content: start;
+}
+
+.integrated-account-details .activities-info-section dt {
+	font-weight: bold;
 }
 
 .integrated-account-details .activities-info-section dd {
@@ -397,4 +401,23 @@ a {
 	border-bottom: 1px solid #efefef;
 	padding: 0 5px;
 	font-size: 12px;
+}
+
+.route-info-section dl {
+	display: grid;
+	grid-template-columns: max-content auto;
+	grid-gap: 5px;
+	padding: 5px;
+	background: #ddd;
+	font-size: 14px;
+	cursor: default;
+}
+
+.route-info-section dl dt {
+	font-weight: bold;
+}
+
+
+.route-info-section dl dd {
+	margin: 0;
 }
