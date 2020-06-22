@@ -27,7 +27,7 @@
 						</td>
 						<td>{{ activity.startAt|date }}</td>
 						<td>
-							<a href="#">{{ activity.title }}</a>
+							<a href="{{ path('route', { id: activity.id }) }}">{{ activity.title }}</a>
 						</td>
 						<td>{{ activity.movingTime|time_format }}</td>
 						<td>{{ activity.distance|meters_to_kilometers }}</td>

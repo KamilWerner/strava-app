@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% set pageTitle = activity.title %}
+{% set loadMapAssets = true %}
+
+{% block rightColumnContent %}
+	<div id="map-section">
+		<div
+			class="map-route"
+			data-polyline="{{ activity.encodedPolyline|google_polyline_decode|json_encode }}"
+		></div>
+	</div>
+{% endblock %}

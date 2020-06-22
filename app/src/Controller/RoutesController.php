@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Activity;
 use App\Entity\User;
 use App\Repository\ActivityRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -26,6 +27,19 @@ class RoutesController extends AbstractController
 	public function __construct(ActivityRepository $activityRepository)
 	{
 		$this->activityRepository = $activityRepository;
+	}
+
+	/**
+	 * @Route("/route/{id}", name="route")
+	 * @Template("routes/show.html.twig")
+	 *
+	 * @param Activity $activity
+	 */
+	public function showAction(Activity $activity)
+	{
+		return [
+			'activity' => $activity,
+		];
 	}
 
 	/**

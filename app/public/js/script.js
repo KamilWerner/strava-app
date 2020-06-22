@@ -27,7 +27,10 @@ $(function () {
 });
 
 $(function () {
-	if (0 === $('#map-section').length) {
+	const $mapSection = $('#map-section');
+	const $mapRoutes = $mapSection.find('.map-route');
+
+	if (0 === $mapSection.length) {
 		return;
 	}
 
@@ -99,7 +102,7 @@ $(function () {
 	const map = L.map('map-section', {
 		center: [54.34766, 18.64542],
 		zoom: 10,
-		layers: [cyclosm]
+		layers: [$mapRoutes.length > 0 ? googleSat : cyclosm]
 	});
 
 	const baseMaps = {
@@ -135,6 +138,27 @@ $(function () {
 
 	L.control.locate().addTo(map);
 	L.control.scale().addTo(map);
+
+	const startIcon = L.icon({
+		iconUrl: '/img/marker-start.png',
+		iconSize: [20, 20]
+	});
+
+	const endIcon = L.icon({
+		iconUrl: '/img/marker-end.png',
+		iconSize: [20, 20]
+	});
+
+	$mapRoutes.each(function () {
+		const polylinePoints = $(this).data('polyline');
+
+		L.marker(polylinePoints[0], { icon: startIcon }).addTo(map);
+		L.marker(polylinePoints[polylinePoints.length - 1], { icon: endIcon }).addTo(map);
+
+		const polyline = L.polyline(polylinePoints, { color: 'red' }).addTo(map);
+
+		map.fitBounds(polyline.getBounds());
+	});
 });
 
 $(function () {
