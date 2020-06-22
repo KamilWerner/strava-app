@@ -17,6 +17,26 @@ class ActivityRepository extends ServiceEntityRepository
 		parent::__construct($registry, Activity::class);
 	}
 
+	public function countByPublic(): int
+	{
+		return (int) $this->createFindByPublicQueryBuilder()
+			->select('COUNT(a.id)')
+			->getQuery()
+			->getSingleScalarResult();
+	}
+
+	/**
+	 * @return Activity[]
+	 */
+	public function findByPublic(int $offset, int $limit): array
+	{
+		return $this->createFindByPublicQueryBuilder()
+			->setFirstResult($offset)
+			->setMaxResults($limit)
+			->getQuery()
+			->getResult();
+	}
+
 	public function countByUser(User $user, bool $includePrivate): int
 	{
 		return (int) $this->createFindByUserQueryBuilder($user, $includePrivate)
@@ -40,6 +60,12 @@ class ActivityRepository extends ServiceEntityRepository
 			->setMaxResults($limit)
 			->getQuery()
 			->getResult();
+	}
+
+	private function createFindByPublicQueryBuilder(): QueryBuilder
+	{
+		return $this->createQueryBuilder('a')
+			->where('a.public = true');
 	}
 
 	private function createFindByUserQueryBuilder(User $user, bool $includePrivate): QueryBuilder

@@ -7,6 +7,7 @@
 		<table cellspacing="0" cellpadding="0">
 			<thead>
 				<tr>
+					<th>Author</th>
 					<th>Date</th>
 					<th>Title</th>
 					<th>Time</th>
@@ -19,6 +20,11 @@
 			<tbody>
 				{% for activity in activities %}
 					<tr>
+						<td>
+							<a href="{{ path('user_routes', {id: activity.user.id}) }}">
+								{{ activity.user.name }} {{ activity.user.surname }}
+							</a>
+						</td>
 						<td>{{ activity.startAt|date }}</td>
 						<td>
 							<a href="#">{{ activity.title }}</a>

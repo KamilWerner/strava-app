@@ -58,4 +58,40 @@ class RoutesController extends AbstractController
 			'activities' => $this->activityRepository->findByUser($user,$offset, self::ROUTES_PER_PAGE, $isAuthUser),
 		];
 	}
+
+	/**
+	 * @Route(
+	 *	"/routes/{page}",
+	 *	name="public_routes",
+	 *	defaults={"page": 1}
+	 * )
+	 * @Template("routes/list.html.twig")
+	 *
+	 * @param int $page
+	 *
+	 * @return array|RedirectResponse
+	 */
+	public function publicRoutesListAction(int $page)
+	{
+		$offset = ($page - 1) * self::ROUTES_PER_PAGE;
+		$activitiesCount = $this->activityRepository->countByPublic();
+
+		if (0 === $activitiesCount) {
+			$this->addWarning('There are not any public routes!');
+
+			return $this->redirectToRoute('homepage');
+		}
+
+		if ($page < 1 || $offset >= $this->activityRepository->countByPublic()) {
+			$this->addError('Invalid page number!');
+
+			return $this->redirectToRoute('public_routes');
+		}
+
+		return [
+			'pageTitle' => 'Public routes',
+			'isAuthUser' => false,
+			'activities' => $this->activityRepository->findByPublic($offset, self::ROUTES_PER_PAGE),
+		];
+	}
 }
