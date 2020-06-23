@@ -7,7 +7,7 @@ namespace App\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-class MetersToKilometersTransformExtension extends AbstractExtension
+class MetersToKilometersTransformerExtension extends AbstractExtension
 {
 	private const KILOMETER_IN_METERS = 1000;
 	private const HOUR_IN_SECONDS = 3600;
