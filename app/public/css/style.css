@@ -49,10 +49,6 @@ a {
 }
 
 .left-column .title-section {
-	display: grid;
-	grid-template-columns: min-content auto;
-	grid-gap: 5px;
-	align-items: baseline;
 	margin-bottom: 15px;
 }
 
