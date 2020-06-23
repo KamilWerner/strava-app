@@ -113,11 +113,11 @@ class Activity
 	 */
 	private $public = false;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="activities")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
+	/**
+	 * @ORM\ManyToOne(targetEntity=User::class, inversedBy="activities")
+	 * @ORM\JoinColumn(nullable=false)
+	 */
+	private $user;
 
 	public function getId(): ?int
 	{
@@ -303,15 +303,15 @@ class Activity
 		return $this;
 	}
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
+	public function getUser(): ?User
+	{
+		return $this->user;
+	}
 
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
+	public function setUser(?User $user): self
+	{
+		$this->user = $user;
 
-        return $this;
-    }
+		return $this;
+	}
 }

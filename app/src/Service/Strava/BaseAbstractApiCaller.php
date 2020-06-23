@@ -10,10 +10,10 @@ abstract class BaseAbstractApiCaller extends ResponseStatusValidatingAbstractApi
 {
 	private const STRAVA_API_URL = 'https://www.strava.com/api/v3';
 
-	protected final function getUrl(): string
+	final protected function getUrl(): string
 	{
 		return self::STRAVA_API_URL.$this->getPath();
 	}
 
-	protected abstract function getPath(): string;
+	abstract protected function getPath(): string;
 }

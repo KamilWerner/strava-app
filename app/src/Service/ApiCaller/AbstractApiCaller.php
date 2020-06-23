@@ -31,9 +31,9 @@ abstract class AbstractApiCaller
 		);
 	}
 
-	protected abstract function getMethod(): string;
+	abstract protected function getMethod(): string;
 
-	protected abstract function getUrl(): string;
+	abstract protected function getUrl(): string;
 
-	protected abstract function getOptions(): array;
+	abstract protected function getOptions(): array;
 }

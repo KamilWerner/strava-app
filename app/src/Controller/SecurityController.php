@@ -15,24 +15,24 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    /**
-     * @Route("/sign_in", name="user_sign_in")
+	/**
+	 * @Route("/sign_in", name="user_sign_in")
 	 *
 	 * @param AuthenticationUtils $authenticationUtils
 	 *
 	 * @return Response
-     */
-    public function login(AuthenticationUtils $authenticationUtils): Response
-    {
-        if ($this->getUser()) {
-        	return $this->redirectLoggedUser();
-        }
+	 */
+	public function login(AuthenticationUtils $authenticationUtils): Response
+	{
+		if ($this->getUser()) {
+			return $this->redirectLoggedUser();
+		}
 
-        return $this->render('security/login.html.twig', [
-        	'last_username' => $authenticationUtils->getLastUsername(),
+		return $this->render('security/login.html.twig', [
+			'last_username' => $authenticationUtils->getLastUsername(),
 			'error' => $authenticationUtils->getLastAuthenticationError(),
 		]);
-    }
+	}
 
 	/**
 	 * @Route("/sign_up", name="user_sign_up")
@@ -80,17 +80,17 @@ class SecurityController extends AbstractController
 		return $this->redirectToRoute('user_sign_in');
 	}
 
-    /**
-     * @Route("/logout", name="user_logout")
+	/**
+	 * @Route("/logout", name="user_logout")
 	 *
 	 * @throws LogicException
-     */
-    public function logout(): void
-    {
-        throw new LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
-    }
+	 */
+	public function logout(): void
+	{
+		throw new LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+	}
 
-    private function redirectLoggedUser(): RedirectResponse
+	private function redirectLoggedUser(): RedirectResponse
 	{
 		$this->addNotice(
 			sprintf(

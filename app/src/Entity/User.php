@@ -22,23 +22,23 @@ class User implements UserInterface
 {
 	private const ROLE_USER = 'ROLE_USER';
 
-    /**
+	/**
 	 * @var int|null
 	 *
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+	 * @ORM\Id()
+	 * @ORM\GeneratedValue()
+	 * @ORM\Column(type="integer")
+	 */
+	private $id;
 
-    /**
+	/**
 	 * @var string
 	 *
-     * @ORM\Column(type="string", length=180, unique=true)
+	 * @ORM\Column(type="string", length=180, unique=true)
 	 *
 	 * @Assert\Email
-     */
-    private $email = '';
+	 */
+	private $email = '';
 
 	/**
 	 * @var string
@@ -47,7 +47,7 @@ class User implements UserInterface
 	 *
 	 * @Assert\NotBlank
 	 */
-    private $name = '';
+	private $name = '';
 
 	/**
 	 * @var string
@@ -56,60 +56,60 @@ class User implements UserInterface
 	 *
 	 * @Assert\NotBlank
 	 */
-    private $surname = '';
+	private $surname = '';
 
-    /**
+	/**
 	 * @var string[]
 	 *
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
+	 * @ORM\Column(type="json")
+	 */
+	private $roles = [];
 
-    /**
-     * @var string
+	/**
+	 * @var string
 	 *
-     * @ORM\Column(type="string")
+	 * @ORM\Column(type="string")
 	 *
 	 * @Assert\NotBlank
-     */
-    private $password = '';
+	 */
+	private $password = '';
 
 	/**
 	 * @var StravaIntegration
 	 *
 	 * @ORM\Embedded(class="StravaIntegration", columnPrefix="strava_integration_")
 	 */
-    private $stravaIntegration;
+	private $stravaIntegration;
 
 	/**
 	 * @var StravaAthlete
 	 *
 	 * @ORM\Embedded(class="StravaAthlete", columnPrefix="strava_athlete_")
 	 */
-    private $stravaAthlete;
+	private $stravaAthlete;
 
 	/**
 	 * @var DateTimeInterface
 	 *
 	 * @ORM\Column(type="datetime")
 	 */
-    private $registeredAt;
+	private $registeredAt;
 
 	/**
 	 * @var DateTimeInterface
 	 *
 	 * @ORM\Column(type="datetime", nullable=true)
 	 */
-    private $lastLoginAt;
+	private $lastLoginAt;
 
-    /**
+	/**
 	 * @var Collection|Activity[]
 	 *
-     * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="user")
-     */
-    private $activities;
+	 * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="user")
+	 */
+	private $activities;
 
-    public function __construct()
+	public function __construct()
 	{
 		$this->stravaIntegration = new StravaIntegration();
 		$this->stravaAthlete = new StravaAthlete();
@@ -118,23 +118,23 @@ class User implements UserInterface
 	}
 
 	public function getId(): ?int
-    {
-        return $this->id;
-    }
+	{
+		return $this->id;
+	}
 
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
+	public function getEmail(): string
+	{
+		return $this->email;
+	}
 
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
+	public function setEmail(string $email): self
+	{
+		$this->email = $email;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getName(): string
+	public function getName(): string
 	{
 		return $this->name;
 	}
@@ -158,42 +158,41 @@ class User implements UserInterface
 		return $this;
 	}
 
-    public function getUsername(): string
-    {
-        return $this->email;
-    }
+	public function getUsername(): string
+	{
+		return $this->email;
+	}
 
-    /**
-     * @return string[]
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
+	/**
+	 * @return string[]
+	 */
+	public function getRoles(): array
+	{
+		$roles = $this->roles;
 
-        // guarantee every user at least has ROLE_USER
-        $roles[] = self::ROLE_USER;
+		$roles[] = self::ROLE_USER;
 
-        return array_unique($roles);
-    }
+		return array_unique($roles);
+	}
 
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
+	public function setRoles(array $roles): self
+	{
+		$this->roles = $roles;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
+	public function getPassword(): string
+	{
+		return $this->password;
+	}
 
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
+	public function setPassword(string $password): self
+	{
+		$this->password = $password;
 
-        return $this;
-    }
+		return $this;
+	}
 
 	public function getStravaIntegration(): StravaIntegration
 	{
@@ -205,7 +204,7 @@ class User implements UserInterface
 		return $this->stravaAthlete;
 	}
 
-    public function getRegisteredAt(): DateTimeInterface
+	public function getRegisteredAt(): DateTimeInterface
 	{
 		return $this->registeredAt;
 	}
@@ -225,49 +224,48 @@ class User implements UserInterface
 	/**
 	 * {@inheritdoc}
 	 */
-    public function getSalt()
-    {
-        // not needed when using the "bcrypt" algorithm in security.yaml
-    }
+	public function getSalt()
+	{
+		// not needed when using the "bcrypt" algorithm in security.yaml
+	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-    public function eraseCredentials()
-    {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
-    }
+	public function eraseCredentials()
+	{
+		// If you store any temporary, sensitive data on the user, clear it here
+		// $this->plainPassword = null;
+	}
 
-    /**
-     * @return Collection|Activity[]
-     */
-    public function getActivities(): Collection
-    {
-        return $this->activities;
-    }
+	/**
+	 * @return Collection|Activity[]
+	 */
+	public function getActivities(): Collection
+	{
+		return $this->activities;
+	}
 
-    public function addActivity(Activity $activity): self
-    {
-        if (!$this->activities->contains($activity)) {
-            $this->activities[] = $activity;
-            $activity->setUser($this);
-        }
+	public function addActivity(Activity $activity): self
+	{
+		if (!$this->activities->contains($activity)) {
+			$this->activities[] = $activity;
+			$activity->setUser($this);
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function removeActivity(Activity $activity): self
-    {
-        if ($this->activities->contains($activity)) {
-            $this->activities->removeElement($activity);
+	public function removeActivity(Activity $activity): self
+	{
+		if ($this->activities->contains($activity)) {
+			$this->activities->removeElement($activity);
 
-            // set the owning side to null (unless already changed)
-            if ($activity->getUser() === $this) {
-                $activity->setUser(null);
-            }
-        }
+			if ($activity->getUser() === $this) {
+				$activity->setUser(null);
+			}
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 }
