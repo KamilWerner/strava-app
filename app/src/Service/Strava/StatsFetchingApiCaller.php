@@ -7,7 +7,7 @@ namespace App\Service\Strava;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class FetchStatsApiCaller extends FetchAbstractApiCaller
+class StatsFetchingApiCaller extends FetchingApiCaller
 {
 	private const STRAVA_API_STATS_PATH = '/athletes/%d/stats';
 

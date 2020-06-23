@@ -7,7 +7,7 @@ namespace App\Service\Strava;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-abstract class FetchAbstractApiCaller extends TokenRefreshingAbstractApiCaller
+abstract class FetchingApiCaller extends TokenValidatingAbstractApiCaller
 {
 	/**
 	 * @var Security

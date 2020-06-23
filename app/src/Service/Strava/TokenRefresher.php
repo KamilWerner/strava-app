@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Security;
 class TokenRefresher extends AbstractTokenUpdater
 {
 	/**
-	 * @var RefreshTokenApiCaller
+	 * @var TokenRefreshingApiCaller
 	 */
 	private $apiCaller;
 
@@ -20,7 +20,7 @@ class TokenRefresher extends AbstractTokenUpdater
 	private $security;
 
 	public function __construct(
-		RefreshTokenApiCaller $apiCaller,
+		TokenRefreshingApiCaller $apiCaller,
 		Security $security,
 		EntityManagerInterface $entityManager
 	) {

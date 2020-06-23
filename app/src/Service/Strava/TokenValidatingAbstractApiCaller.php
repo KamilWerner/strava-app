@@ -7,7 +7,7 @@ namespace App\Service\Strava;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
-abstract class TokenRefreshingAbstractApiCaller extends BaseAbstractApiCaller
+abstract class TokenValidatingAbstractApiCaller extends BaseAbstractApiCaller
 {
 	/**
 	 * @var TokenRefresher

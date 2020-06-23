@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service\Strava;
 
-class FetchActivitiesApiCaller extends FetchAbstractApiCaller
+class ActivitiesFetchingApiCaller extends FetchingApiCaller
 {
 	private const STRAVA_API_ACTIVITIES_PATH = '/athlete/activities';
 

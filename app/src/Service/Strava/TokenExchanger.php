@@ -10,12 +10,12 @@ use Symfony\Component\Security\Core\Security;
 class TokenExchanger extends AbstractTokenUpdater
 {
 	/**
-	 * @var ExchangeTokenApiCaller
+	 * @var TokenExchangingApiCaller
 	 */
 	private $apiCaller;
 
 	public function __construct(
-		ExchangeTokenApiCaller $apiCaller,
+		TokenExchangingApiCaller $apiCaller,
 		Security $security,
 		EntityManagerInterface $entityManager
 	) {

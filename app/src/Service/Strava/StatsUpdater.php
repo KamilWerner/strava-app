@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Security;
 class StatsUpdater
 {
 	/**
-	 * @var FetchStatsApiCaller
+	 * @var StatsFetchingApiCaller
 	 */
 	private $apiCaller;
 
@@ -25,7 +25,7 @@ class StatsUpdater
 	private $entityManager;
 
 	public function __construct(
-		FetchStatsApiCaller $apiCaller,
+		StatsFetchingApiCaller $apiCaller,
 		Security $security,
 		EntityManagerInterface $entityManager
 	) {

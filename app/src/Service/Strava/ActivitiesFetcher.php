@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\Security;
 class ActivitiesFetcher
 {
 	/**
-	 * @var FetchActivitiesApiCaller
+	 * @var ActivitiesFetchingApiCaller
 	 */
 	private $apiCaller;
 
@@ -27,7 +27,7 @@ class ActivitiesFetcher
 	private $entityManager;
 
 	public function __construct(
-		FetchActivitiesApiCaller $apiCaller,
+		ActivitiesFetchingApiCaller $apiCaller,
 		Security $security,
 		EntityManagerInterface $entityManager
 	) {

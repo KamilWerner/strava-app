@@ -6,7 +6,7 @@ namespace App\Service\Strava;
 
 use DomainException;
 
-class ExchangeTokenApiCaller extends AuthorizationAbstractApiCaller
+class TokenExchangingApiCaller extends AuthorizationAbstractApiCaller
 {
 	private const AUTH_GRANT_TYPE_EXCHANGE = 'authorization_code';
 
