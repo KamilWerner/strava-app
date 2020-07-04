@@ -37,6 +37,13 @@ class Activity
 	private $title;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="text")
+	 */
+	private $description = '';
+
+	/**
 	 * @var float|null
 	 *
 	 * @ORM\Column(type="float", nullable=true)
@@ -144,6 +151,18 @@ class Activity
 	public function setTitle(string $title): self
 	{
 		$this->title = $title;
+
+		return $this;
+	}
+
+	public function getDescription(): string
+	{
+		return $this->description;
+	}
+
+	public function setDescription(string $description): self
+	{
+		$this->description = $description;
 
 		return $this;
 	}
