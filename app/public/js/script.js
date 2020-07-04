@@ -158,6 +158,25 @@ $(function () {
 		const polyline = L.polyline(polylinePoints, { color: 'red' }).addTo(map);
 
 		map.fitBounds(polyline.getBounds());
+
+		$('#route-start-navigate-button').click(function (e) {
+			e.preventDefault();
+
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function (position) {
+					L.Routing.control({
+						waypoints: [
+							L.latLng(position.coords.latitude, position.coords.longitude),
+							L.latLng(polylinePoints[0][0], polylinePoints[0][1])
+						]
+					}).addTo(map);
+				});
+
+				$(this).fadeOut(function () {
+					$(this).remove();
+				});
+			}
+		});
 	});
 });
 
