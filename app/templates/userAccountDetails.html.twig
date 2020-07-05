@@ -9,7 +9,11 @@
 
 				<div class="account-info-name">
 					Hi, {{ app.user.name }} {{ app.user.surname }}
-					<a href="{{ path('user_logout') }}">Logout 🚪</a>
+
+					<div class="user-menu">
+						<a href="">⚙️ Settings</a>
+						<a href="{{ path('user_logout') }}"> 🚪Logout</a>
+					</div>
 				</div>
 			</div>
 
@@ -27,7 +31,7 @@
 			</div>
 		</div>
 
-		{% include 'menu.html.twig' only %}
+		{% include 'menu.html.twig' %}
 	{% else %}
 		<div class="not-integrated-account-details">
 			<div class="account-info-section">

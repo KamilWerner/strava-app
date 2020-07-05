@@ -2,6 +2,7 @@
 
 {% set pageTitle = activity.title %}
 {% set loadMapAssets = true %}
+{% set isRoutePage = true %}
 
 {% block leftColumnContent %}
 	{% include 'routes/infoSection.html.twig' with { activity: activity } only %}

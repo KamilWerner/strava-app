@@ -1,5 +1,8 @@
 <div class="menu-section">
 	<a class="menu-option" href="{{ path('user_routes', { id: app.user.id }) }}">🔒 My routes</a>
 	<a class="menu-option" href="{{ path('public_routes') }}">🗺️ Public routes</a>
-	<a class="menu-option" href="">⚙️ Account settings</a>
+
+	{% if isRoutePage is defined and isRoutePage %}
+		<a class="menu-option route-start-navigate-button" href="{{ path('public_routes') }}">Navigate to start 👉</a>
+	{% endif %}
 </div>

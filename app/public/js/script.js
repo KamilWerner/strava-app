@@ -159,7 +159,7 @@ $(function () {
 
 		map.fitBounds(polyline.getBounds());
 
-		$('#route-start-navigate-button').click(function (e) {
+		$('.route-start-navigate-button').click(function (e) {
 			e.preventDefault();
 
 			if (navigator.geolocation) {
