@@ -123,7 +123,7 @@ class RoutesController extends AbstractController
 	public function userRouteEditAction(Request $request, Activity $activity)
 	{
 		if ($this->getUser()->getId() !== $activity->getUser()->getId()) {
-			$this->addError('You can not edit someone else route!');
+			$this->addError('You can not change someone else route!');
 
 			return $this->redirectToRoute('homepage');
 		}
@@ -144,5 +144,33 @@ class RoutesController extends AbstractController
 		$this->addNotice('Successfully edited route informations!');
 
 		return $this->redirectToRoute('route', ['id' => $activity->getId()]);
+	}
+
+	/**
+	 * @Route("/route/{id}/toggle_public", name="user_route_toggle_public")
+	 *
+	 * @param Activity $activity
+	 *
+	 * @return RedirectResponse
+	 */
+	public function userRouteTogglePublishAction(Activity $activity): RedirectResponse
+	{
+		if ($this->getUser()->getId() !== $activity->getUser()->getId()) {
+			$this->addError('You can not change someone else route!');
+
+			return $this->redirectToRoute('homepage');
+		}
+
+		$activity->setPublic(!$activity->isPublic());
+
+		$this->getDoctrine()->getManager()->flush();
+
+		$this->addNotice(
+			$activity->isPublic()
+				? 'Route marked as publish!'
+				: 'Route marked as hidden!'
+		);
+
+		return $this->redirectToRoute('user_routes', ['id' => $activity->getUser()->getId()]);
 	}
 }
