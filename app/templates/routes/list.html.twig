@@ -35,7 +35,7 @@
 						<td>{{ activity.public ? 'Yes' : 'No' }}</td>
 						<td>
 							{% if isAuthUser %}
-								<a href="#">Edit</a>
+								<a href="{{ path('user_route_edit', { id: activity.id }) }}">Edit</a>
 								| <a href="#">Publish</a>
 							{% endif %}
 						</td>

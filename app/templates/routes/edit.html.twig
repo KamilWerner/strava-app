@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% set pageTitle = activity.Title ~ ' - edit' %}
+
+{% block rightColumnContent %}
+	<div class="activities-section">
+		<h3>{{ pageTitle }}</h3>
+
+		{{ form(form) }}
+	</div>
+{% endblock %}

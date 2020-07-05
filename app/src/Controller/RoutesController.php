@@ -6,10 +6,12 @@ namespace App\Controller;
 
 use App\Entity\Activity;
 use App\Entity\User;
+use App\Form\Type\ActivityEditType;
 use App\Repository\ActivityRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -31,7 +33,7 @@ class RoutesController extends AbstractController
 
 	/**
 	 * @Route("/route/{id}", name="route")
-	 * @Template("routes/show.html.twig")
+	 * @Template
 	 *
 	 * @param Activity $activity
 	 */
@@ -69,7 +71,7 @@ class RoutesController extends AbstractController
 		return [
 			'pageTitle' => $user->getName().' '.$user->getSurname().' routes',
 			'isAuthUser' => $isAuthUser,
-			'activities' => $this->activityRepository->findByUser($user,$offset, self::ROUTES_PER_PAGE, $isAuthUser),
+			'activities' => $this->activityRepository->findByUser($user, $offset, self::ROUTES_PER_PAGE, $isAuthUser),
 		];
 	}
 
@@ -107,5 +109,40 @@ class RoutesController extends AbstractController
 			'isAuthUser' => false,
 			'activities' => $this->activityRepository->findByPublic($offset, self::ROUTES_PER_PAGE),
 		];
+	}
+
+	/**
+	 * @Route("/route/{id}/edit", name="user_route_edit")
+	 * @Template("routes/edit.html.twig")
+	 *
+	 * @param Request  $request
+	 * @param Activity $activity
+	 *
+	 * @return array|RedirectResponse
+	 */
+	public function userRouteEditAction(Request $request, Activity $activity)
+	{
+		if ($this->getUser()->getId() !== $activity->getUser()->getId()) {
+			$this->addError('You can not edit someone else route!');
+
+			return $this->redirectToRoute('homepage');
+		}
+
+		$form = $this->createForm(ActivityEditType::class, $activity);
+
+		$form->handleRequest($request);
+
+		if (!$form->isSubmitted() || !$form->isValid()) {
+			return [
+				'form' => $form->createView(),
+				'activity' => $activity,
+			];
+		}
+
+		$this->getDoctrine()->getManager()->flush();
+
+		$this->addNotice('Successfully edited route informations!');
+
+		return $this->redirectToRoute('route', ['id' => $activity->getId()]);
 	}
 }
