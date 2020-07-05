@@ -11,7 +11,7 @@
 					Hi, {{ app.user.name }} {{ app.user.surname }}
 
 					<div class="user-menu">
-						<a href="">⚙️ Settings</a>
+						<a href="{{ path('user_edit') }}">⚙️ Settings</a>
 						<a href="{{ path('user_logout') }}"> 🚪Logout</a>
 					</div>
 				</div>
