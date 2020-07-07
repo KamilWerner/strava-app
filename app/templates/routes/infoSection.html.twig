@@ -25,4 +25,6 @@
 		<dt>Low elevation:</dt>
 		<dd>{{ activity.lowElevation }} m</dd>
 	</dl>
+
+	{% include 'routes/commentsSection.html.twig' with { activity: activity } only %}
 </div>

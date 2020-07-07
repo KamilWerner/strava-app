@@ -1,0 +1,19 @@
+{% if activity.public %}
+	<div>
+		{% for comment in activity.comments %}
+			<div>
+				<div>
+					<img src="{{ comment.user.stravaAthlete.thumbUrl }}" alt="{{ comment.user.email }}" />
+
+					{{ comment.user.name }} {{ comment.user.surname }}
+				</div>
+
+				<div>{{ comment.content }}</div>
+
+				<div>{{ comment.createdAt|date }}</div>
+			</div>
+		{% endfor %}
+	</div>
+
+	{{ render(controller('App\\Controller\\CommentsController::addAction', { id: activity.id })) }}
+{% endif %}
