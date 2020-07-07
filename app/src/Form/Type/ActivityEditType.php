@@ -19,7 +19,10 @@ class ActivityEditType extends AbstractType
 	{
 		$builder
 			->add('title', TextType::class)
-			->add('description', TextareaType::class)
+			->add('description', TextareaType::class, [
+				'required' => false,
+				'empty_data' => '',
+			])
 			->add('public', CheckboxType::class, [
 				'required' => false,
 			])
