@@ -11,6 +11,10 @@
 				<div>{{ comment.content }}</div>
 
 				<div>{{ comment.createdAt|date }}</div>
+
+				{% if app.user.id == comment.user.id %}
+					<a href="{{ path('public_route_comment_remove', { id: comment.id }) }}">Remove</a>
+				{% endif %}
 			</div>
 		{% endfor %}
 	</div>

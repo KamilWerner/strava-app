@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Activity;
+use App\Entity\Comment;
 use App\Form\Type\CommentAddType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -59,5 +60,29 @@ class CommentsController extends AbstractController
 		$this->addNotice('Successfully added comment!');
 
 		return $this->redirectToRoute('route', ['id' => $activity->getId()]);
+	}
+
+	/**
+	 * @Route("/comment/{id}/remove", name="public_route_comment_remove")
+	 *
+	 * @param Comment $comment
+	 *
+	 * @return RedirectResponse
+	 */
+	public function removeAction(Comment $comment): RedirectResponse
+	{
+		if ($this->getUser()->getId() !== $comment->getUser()->getId()) {
+			$this->addError('You cannot remove someone else comment!');
+
+			return $this->redirectToRoute('route', ['id' => $comment->getActivity()->getId()]);
+		}
+
+		$entityManager = $this->getDoctrine()->getManager();
+		$entityManager->remove($comment);
+		$entityManager->flush();
+
+		$this->addNotice('Comment successfully removed!');
+
+		return $this->redirectToRoute('route', ['id' => $comment->getActivity()->getId()]);
 	}
 }
