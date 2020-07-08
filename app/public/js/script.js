@@ -201,7 +201,7 @@ $(function () {
 			})
 			.bindPopup(
 				'<b>' + title + '</b><br />' +
-				shortDescription + '<br /><br />' +
+				(shortDescription ? shortDescription + '<br /><br />' : '<br />') +
 				'<b>Time:</b> ' + time + '<br />' +
 				'<b>Distance:</b> ' + distance + '<br />' +
 				'<b>Elevation:</b> ' + elevation
