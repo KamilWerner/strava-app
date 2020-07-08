@@ -36,6 +36,7 @@ class ActivityRepository extends ServiceEntityRepository
 		return $this->createFindByPublicQueryBuilder()
 			->setFirstResult($offset)
 			->setMaxResults($limit)
+			->orderBy('a.publishedAt', 'DESC')
 			->getQuery()
 			->getResult();
 	}

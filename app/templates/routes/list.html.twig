@@ -32,7 +32,13 @@
 						<td>{{ activity.movingTime|time_format }}</td>
 						<td>{{ activity.distance|meters_to_kilometers }}</td>
 						<td>{{ activity.elevation }} m</td>
-						<td>{{ activity.public ? 'Yes' : 'No' }}</td>
+						<td>
+							{% if activity.public %}
+								Yes ({{ activity.publishedAt|date }})
+							{% else %}
+								No
+							{% endif %}
+						</td>
 						<td>
 							{% if isAuthUser %}
 								<a href="{{ path('user_route_edit', { id: activity.id }) }}">Edit</a>

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -121,6 +122,13 @@ class Activity
 	 * @ORM\Column(type="boolean")
 	 */
 	private $public = false;
+
+	/**
+	 * @var DateTimeInterface
+	 *
+	 * @ORM\Column(type="datetime", nullable=true)
+	 */
+	private $publishedAt;
 
 	/**
 	 * @var User|null
@@ -333,9 +341,20 @@ class Activity
 
 	public function setPublic(bool $public): self
 	{
+		if ($public !== $this->public) {
+			$this->publishedAt = $public
+				? new DateTime()
+				: null;
+		}
+
 		$this->public = $public;
 
 		return $this;
+	}
+
+	public function getPublishedAt(): ?DateTimeInterface
+	{
+		return $this->publishedAt;
 	}
 
 	public function getUser(): ?User
