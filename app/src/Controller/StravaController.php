@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Service\ApiCaller\InvalidResponseStatusException;
+use App\Service\Strava\ActivitiesFetcher;
 use App\Service\Strava\Integrator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -63,5 +64,33 @@ class StravaController extends AbstractController
 		$this->addNotice('Successfully integrated with Strava!');
 
 		return $this->redirectToRoute('homepage');
+	}
+
+	/**
+	 * @Route("/strava/fetch_activities", name="strava_fetch_activities")
+	 *
+	 * @param ActivitiesFetcher $activitiesFetcher
+	 *
+	 * @return RedirectResponse
+	 */
+	public function fetchActivitiesAction(ActivitiesFetcher $activitiesFetcher): RedirectResponse
+	{
+		if (!$this->getUser()->getStravaIntegration()->isIntegrated()) {
+			$this->addError('You need to integrate with Strava first!');
+
+			return $this->redirectToRoute('homepage');
+		}
+
+		try {
+			$activitiesFetcher->fetch();
+		} catch (InvalidResponseStatusException $e) {
+			$this->addError('Invalid response from Strava… try again later!');
+
+			return $this->redirectToRoute('homepage');
+		}
+
+		$this->addNotice('Successfully fetched routes!');
+
+		return $this->redirectToRoute('user_routes', ['id' => $this->getUser()->getId()]);
 	}
 }

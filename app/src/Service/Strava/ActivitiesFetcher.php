@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service\Strava;
 
 use App\Entity\Activity;
+use App\Repository\ActivityRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
@@ -22,6 +23,11 @@ class ActivitiesFetcher
 	private $security;
 
 	/**
+	 * @var ActivityRepository
+	 */
+	private $activityRepository;
+
+	/**
 	 * @var EntityManagerInterface
 	 */
 	private $entityManager;
@@ -29,10 +35,12 @@ class ActivitiesFetcher
 	public function __construct(
 		ActivitiesFetchingApiCaller $apiCaller,
 		Security $security,
+		ActivityRepository $activityRepository,
 		EntityManagerInterface $entityManager
 	) {
 		$this->apiCaller = $apiCaller;
 		$this->security = $security;
+		$this->activityRepository = $activityRepository;
 		$this->entityManager = $entityManager;
 	}
 
@@ -41,6 +49,10 @@ class ActivitiesFetcher
 		$activitiesData = $this->apiCaller->call()->toArray();
 
 		foreach ($activitiesData as $activityData) {
+			if ($this->activityRepository->findByOriginId((int) $activityData['id'])) {
+				continue;
+			}
+
 			$activity = new Activity();
 
 			$activity

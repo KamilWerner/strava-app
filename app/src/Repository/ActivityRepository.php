@@ -41,6 +41,15 @@ class ActivityRepository extends ServiceEntityRepository
 			->getResult();
 	}
 
+	public function findByOriginId(int $originId): ?Activity
+	{
+		return $this->createQueryBuilder('a')
+			->where('a.originId = :originId')
+			->setParameter('originId', $originId)
+			->getQuery()
+			->getOneOrNullResult();
+	}
+
 	public function countByUser(User $user, bool $includePrivate): int
 	{
 		return (int) $this->createFindByUserQueryBuilder($user, $includePrivate)

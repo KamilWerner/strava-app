@@ -4,6 +4,10 @@
 	<div class="activities-section">
 		<h3>{{ pageTitle }}</h3>
 
+		{% if isAuthUser %}
+			<a href="{{ path('strava_fetch_activities') }}">Fetch new routes!</a>
+		{% endif %}
+
 		<table cellspacing="0" cellpadding="0">
 			<thead>
 				<tr>
