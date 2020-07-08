@@ -1,0 +1,14 @@
+<div id="map-section">
+	{% for activity in activities %}
+		<div
+			class="map-route"
+			data-path="{{ path('route', { id: activity.id }) }}"
+			data-polyline="{{ activity.encodedPolyline|google_polyline_decode|json_encode }}"
+			data-title="{{ activity.title }}"
+			data-short-description="{{ activity.description|length > 100 ? activity.description|slice(0, 100) ~ '…' : activity.description }}"
+			data-time="{{ activity.movingTime|time_format }}"
+			data-distance="{{ activity.distance|meters_to_kilometers }}"
+			data-elevation="{{ activity.elevation }} m"
+		></div>
+	{% endfor %}
+</div>

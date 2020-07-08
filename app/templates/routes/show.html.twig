@@ -9,10 +9,5 @@
 {% endblock %}
 
 {% block rightColumnContent %}
-	<div id="map-section">
-		<div
-			class="map-route"
-			data-polyline="{{ activity.encodedPolyline|google_polyline_decode|json_encode }}"
-		></div>
-	</div>
+	{% include 'map.html.twig' with { activities: [activity] } only %}
 {% endblock %}

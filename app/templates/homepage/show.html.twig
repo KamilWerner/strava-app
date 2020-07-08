@@ -8,5 +8,5 @@
 {% endblock %}
 
 {% block rightColumnContent %}
-	<div id="map-section"></div>
+	{% include 'map.html.twig' with { activities: activities } only %}
 {% endblock %}

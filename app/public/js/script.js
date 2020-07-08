@@ -149,13 +149,63 @@ $(function () {
 		iconSize: [20, 20]
 	});
 
+	const colors = ['red', 'green', 'blue', 'yellow', 'pink'];
+	var colorIndex = 0;
+
 	$mapRoutes.each(function () {
-		const polylinePoints = $(this).data('polyline');
+		const $mapRoute = $(this);
+
+		const path = $mapRoute.attr('data-path');
+		const polylinePoints = $mapRoute.data('polyline');
+		const title = $mapRoute.attr('data-title');
+		const shortDescription = $mapRoute.attr('data-short-description');
+		const time = $mapRoute.attr('data-time');
+		const distance = $mapRoute.attr('data-distance');
+		const elevation = $mapRoute.attr('data-elevation');
 
 		L.marker(polylinePoints[0], { icon: startIcon }).addTo(map);
 		L.marker(polylinePoints[polylinePoints.length - 1], { icon: endIcon }).addTo(map);
 
-		const polyline = L.polyline(polylinePoints, { color: 'red' }).addTo(map);
+		const polyline = L
+			.polyline(polylinePoints, {
+				color: colors[colorIndex],
+				weight: 5
+			})
+			.bindPopup(
+				'<b>' + title + '</b><br />' +
+				shortDescription + '<br /><br />' +
+				'<b>Time:</b> ' + time + '<br />' +
+				'<b>Distance:</b> ' + distance + '<br />' +
+				'<b>Elevation:</b> ' + elevation
+			)
+			.addTo(map);
+
+		polyline.on('mouseover', function (e) {
+			this
+				.getPopup()
+				.setLatLng(e.latlng)
+				.openOn(map);
+
+			this
+				.bringToFront()
+				.setStyle({ weight: 7 });
+		});
+
+		polyline.on('mouseout', function () {
+			this
+				.closePopup()
+				.setStyle({ weight: 5 });
+		});
+
+		polyline.on('click', function () {
+			window.location.href = path;
+		});
+
+		++colorIndex;
+
+		if (colors.length === colorIndex) {
+			colorIndex = 0;
+		}
 
 		map.fitBounds(polyline.getBounds());
 
