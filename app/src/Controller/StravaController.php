@@ -82,14 +82,18 @@ class StravaController extends AbstractController
 		}
 
 		try {
-			$activitiesFetcher->fetch();
+			$fetchedActivitiesCount = $activitiesFetcher->fetch();
 		} catch (InvalidResponseStatusException $e) {
 			$this->addError('Invalid response from Strava… try again later!');
 
 			return $this->redirectToRoute('homepage');
 		}
 
-		$this->addNotice('Successfully fetched routes!');
+		$this->addNotice(
+			$fetchedActivitiesCount
+				? 'Successfully fetched '.$fetchedActivitiesCount.' new routes!'
+				: 'There are no new routes!'
+		);
 
 		return $this->redirectToRoute('user_routes', ['id' => $this->getUser()->getId()]);
 	}

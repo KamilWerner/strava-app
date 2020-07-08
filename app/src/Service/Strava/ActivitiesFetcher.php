@@ -44,9 +44,11 @@ class ActivitiesFetcher
 		$this->entityManager = $entityManager;
 	}
 
-	public function fetch(): void
+	public function fetch(): int
 	{
 		$activitiesData = $this->apiCaller->call()->toArray();
+
+		$activitiesCount = 0;
 
 		foreach ($activitiesData as $activityData) {
 			if ($this->activityRepository->findByOriginId((int) $activityData['id'])) {
@@ -71,8 +73,12 @@ class ActivitiesFetcher
 				->setUser($this->security->getUser());
 
 			$this->entityManager->persist($activity);
+
+			++$activitiesCount;
 		}
 
 		$this->entityManager->flush();
+
+		return $activitiesCount;
 	}
 }
