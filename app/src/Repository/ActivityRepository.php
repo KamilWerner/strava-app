@@ -26,6 +26,9 @@ class ActivityRepository extends ServiceEntityRepository
 	}
 
 	/**
+	 * @param int $offset
+	 * @param int $limit
+	 *
 	 * @return Activity[]
 	 */
 	public function findByPublic(int $offset, int $limit): array
@@ -49,13 +52,13 @@ class ActivityRepository extends ServiceEntityRepository
 	 * @param User $user
 	 * @param int  $offset
 	 * @param int  $limit
-	 * @param bool $invludePrivate
+	 * @param bool $includePrivate
 	 *
 	 * @return Activity[]
 	 */
-	public function findByUser(User $user, int $offset, int $limit, bool $invludePrivate): array
+	public function findByUser(User $user, int $offset, int $limit, bool $includePrivate): array
 	{
-		return $this->createFindByUserQueryBuilder($user, $invludePrivate)
+		return $this->createFindByUserQueryBuilder($user, $includePrivate)
 			->setFirstResult($offset)
 			->setMaxResults($limit)
 			->getQuery()
