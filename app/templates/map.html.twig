@@ -1,4 +1,4 @@
-<div id="map-section">
+<div id="map-section"{% if layer is defined and layer %} data-layer="{{ layer }}"{% endif %}>
 	{% for activity in activities %}
 		<div
 			class="map-route"

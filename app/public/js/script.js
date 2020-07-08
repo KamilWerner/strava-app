@@ -99,10 +99,38 @@ $(function () {
 		maxZoom: 20,
 	});
 
+	var layer;
+
+	switch ($mapSection.attr('data-layer')) {
+		case 'CyclOSM':
+			layer = cyclosm;
+
+			break;
+		case 'OpenCycleMap':
+			layer = ocm;
+
+			break;
+		case 'OpenStreetMap':
+			layer = osm;
+
+			break;
+		case 'Google Streets':
+			layer = googleStreets;
+
+			break;
+		case 'Google Hybrid':
+			layer = googleHybrid;
+
+			break;
+		case 'Google Satelite':
+		default:
+			layer = googleSat;
+	}
+
 	const map = L.map('map-section', {
 		center: [54.34766, 18.64542],
 		zoom: 10,
-		layers: [$mapRoutes.length > 0 ? googleSat : cyclosm]
+		layers: [layer]
 	});
 
 	const baseMaps = {
