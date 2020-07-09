@@ -366,7 +366,53 @@ a {
 }
 
 .right-column .activities-section {
+	position: relative;
 	padding: 15px;
+}
+
+.activities-section .strava-fetch-activities-button {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	font-size: 11px;
+	padding: 5px;
+	background: #ddd;
+	color: #252525;
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+}
+
+.activities-section .strava-fetch-activities-button:hover {
+	background: #252525;
+	color: #fff;
+}
+
+.activities-section .pagination-container {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+}
+
+.pagination-container a, .pagination-container span {
+	margin: 0 3px;
+	padding: 5px;
+	background: #ccc;
+	color: #252525;
+	font-size: 11px;
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+}
+
+.pagination-container .active-page {
+	background: #fff;
+	border: 1px solid #252525;
+	padding: 4px;
+	cursor: default;
+}
+
+.pagination-container a:hover {
+	background: #252525;
+	color: #fff;
 }
 
 .activities-section h3 {

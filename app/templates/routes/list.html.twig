@@ -5,7 +5,10 @@
 		<h3>{{ pageTitle }}</h3>
 
 		{% if isAuthUser %}
-			<a href="{{ path('strava_fetch_activities') }}">Fetch new routes!</a>
+			<a
+				class="strava-fetch-activities-button"
+				href="{{ path('strava_fetch_activities') }}"
+			>Fetch new routes!</a>
 		{% endif %}
 
 		<table cellspacing="0" cellpadding="0">
@@ -56,12 +59,14 @@
 			</tbody>
 		</table>
 
-		{% for pageNumber in 1..pagesNumber %}
-			{% if currentPage == pageNumber %}
-				<span>{{ pageNumber }}</span>
-			{% else %}
-				<a href="{{ pagePath }}/{{ pageNumber }}">{{ pageNumber }}</a>
-			{% endif %}
-		{% endfor %}
+		<div class="pagination-container">
+			{% for pageNumber in 1..pagesNumber %}
+				{% if currentPage == pageNumber %}
+					<span class="active-page">{{ pageNumber }}</span>
+				{% else %}
+					<a href="{{ pagePath }}/{{ pageNumber }}">{{ pageNumber }}</a>
+				{% endif %}
+			{% endfor %}
+		</div>
 	</div>
 {% endblock %}
