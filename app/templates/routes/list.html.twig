@@ -55,5 +55,13 @@
 				{% endfor %}
 			</tbody>
 		</table>
+
+		{% for pageNumber in 1..pagesNumber %}
+			{% if currentPage == pageNumber %}
+				<span>{{ pageNumber }}</span>
+			{% else %}
+				<a href="{{ pagePath }}/{{ pageNumber }}">{{ pageNumber }}</a>
+			{% endif %}
+		{% endfor %}
 	</div>
 {% endblock %}

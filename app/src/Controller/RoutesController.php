@@ -61,8 +61,9 @@ class RoutesController extends AbstractController
 	{
 		$offset = ($page - 1) * self::ROUTES_PER_PAGE;
 		$isAuthUser = $user === $this->getUser();
+		$userRoutesNumber = $this->activityRepository->countByUser($user, $isAuthUser);
 
-		if ($page < 1 || $offset >= $this->activityRepository->countByUser($user, $isAuthUser)) {
+		if ($page < 1 || $offset >= $userRoutesNumber) {
 			$this->addError('Invalid page number!');
 
 			return $this->redirectToRoute('user_routes', ['id' => $user->getId()]);
@@ -72,6 +73,9 @@ class RoutesController extends AbstractController
 			'pageTitle' => $user->getName().' '.$user->getSurname().' routes',
 			'isAuthUser' => $isAuthUser,
 			'activities' => $this->activityRepository->findByUser($user, $offset, self::ROUTES_PER_PAGE, $isAuthUser),
+			'pagesNumber' => ceil($userRoutesNumber / self::ROUTES_PER_PAGE),
+			'currentPage' => $page,
+			'pagePath' => $this->generateUrl('user_routes', ['id' => $user->getId()]),
 		];
 	}
 
@@ -90,15 +94,15 @@ class RoutesController extends AbstractController
 	public function publicRoutesListAction(int $page)
 	{
 		$offset = ($page - 1) * self::ROUTES_PER_PAGE;
-		$activitiesCount = $this->activityRepository->countByPublic();
+		$publicRoutesNumber = $this->activityRepository->countByPublic();
 
-		if (0 === $activitiesCount) {
+		if (0 === $publicRoutesNumber) {
 			$this->addWarning('There are not any public routes!');
 
 			return $this->redirectToRoute('homepage');
 		}
 
-		if ($page < 1 || $offset >= $this->activityRepository->countByPublic()) {
+		if ($page < 1 || $offset >= $publicRoutesNumber) {
 			$this->addError('Invalid page number!');
 
 			return $this->redirectToRoute('public_routes');
@@ -108,6 +112,9 @@ class RoutesController extends AbstractController
 			'pageTitle' => 'Public routes',
 			'isAuthUser' => false,
 			'activities' => $this->activityRepository->findByPublic($offset, self::ROUTES_PER_PAGE),
+			'pagesNumber' => ceil($publicRoutesNumber / self::ROUTES_PER_PAGE),
+			'currentPage' => $page,
+			'pagePath' => $this->generateUrl('public_routes'),
 		];
 	}
 
