@@ -1,0 +1,23 @@
+{% block form_errors %}
+	{% for error in errors %}
+		<div class="default-form-error-container">{{ error.message }}</div>
+	{% endfor %}
+{% endblock %}
+
+{% block submit_row %}
+	<div class="default-form-submit-row">
+		{{ form_widget(form) }}
+	</div>
+{% endblock %}
+
+{% block form_row %}
+	<div class="default-form-row">
+		{{ form_label(form) }}
+
+		{{ form_errors(form) }}
+
+		<div class="default-form-widget-container">
+			{{ form_widget(form) }}
+		</div>
+	</div>
+{% endblock %}

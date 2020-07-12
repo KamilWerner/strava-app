@@ -464,3 +464,71 @@ a {
 .route-info-section dl dd {
 	margin: 0;
 }
+
+.default-form-row {
+	margin-bottom: 10px;
+}
+
+.default-form-row label {
+	font-size: 12px;
+}
+
+.default-form-row .default-form-widget-container input,
+.default-form-row .default-form-widget-container textarea {
+	padding: 7px 5px;
+	width: 35%;
+	font-size: 14px;
+	border: 1px solid #ccc;
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+}
+
+.default-form-row .default-form-widget-container textarea {
+	height: 100px;
+	resize: none;
+}
+
+.default-form-row .default-form-widget-container input[type="checkbox"] {
+	width: auto;
+	margin: 5px 0;
+}
+
+.default-form-row .default-form-widget-container input:focus,
+.default-form-row .default-form-widget-container textarea:focus {
+	outline: none;
+	background: #eee;
+}
+
+.default-form-row .default-form-error-container {
+	color: indianred;
+	font-size: 11px;
+	font-weight: bold;
+	margin: 5px 0;
+	cursor: default;
+}
+
+.default-form-row .default-form-error-container:before {
+	content: "ERROR";
+	font-size: 9px;
+	color: #fff;
+	background: indianred;
+	padding: 5px 5px 3px;
+	margin-right: 3px;
+	border-radius: 100px;
+}
+
+.default-form-submit-row button {
+	background: #ccc;
+	color: #252525;
+	border: none;
+	font-size: 15px;
+	padding: 5px 15px;
+	cursor: pointer;
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+}
+
+.default-form-submit-row button:hover {
+	background: #252525;
+	color: #fff;
+}

@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme form 'defaultFormTheme.html.twig' %}
+
 {% set pageTitle = app.user.name ~ ' ' ~ app.user.surname ~ ' - edit' %}
 
 {% block rightColumnContent %}
