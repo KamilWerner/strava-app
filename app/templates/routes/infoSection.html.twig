@@ -1,6 +1,9 @@
 <div class="route-info-section left-column-section">
 	{% if app.user.id == activity.user.id %}
-		<a href="{{ path('user_route_edit', { id: activity.id }) }}">Edit</a>
+		<a
+			class="user-route-edit-button"
+			href="{{ path('user_route_edit', { id: activity.id }) }}"
+		>Edit</a>
 	{% endif %}
 
 	<h2>Route: {{ activity.title }}</h2>
