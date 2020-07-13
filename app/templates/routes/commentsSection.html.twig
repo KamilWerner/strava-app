@@ -1,23 +1,32 @@
 {% if activity.public %}
-	<div>
-		{% for comment in activity.comments %}
-			<div>
-				<div>
-					<img src="{{ comment.user.stravaAthlete.thumbUrl }}" alt="{{ comment.user.email }}" />
+	<div class="show-hide-section">
+		<a href="#" class="show-hide-button"></a>
 
-					{{ comment.user.name }} {{ comment.user.surname }}
+		<h2>Comments</h2>
+
+		{{ render(controller('App\\Controller\\CommentsController::addAction', { id: activity.id })) }}
+
+		<div class="show-hide-element user-route-comments-section">
+			{% for comment in activity.comments %}
+				<div class="user-route-comment-container">
+					<img
+						class="user-avatar"
+						src="{{ comment.user.stravaAthlete.thumbUrl }}" alt="{{ comment.user.email }}"
+					/>
+
+					<div class="user-name">{{ comment.user.name }} {{ comment.user.surname }}</div>
+
+					<div class="comment-content">{{ comment.content }}</div>
+
+					<div class="comment-info">
+						{{ comment.createdAt|date }}
+
+						{% if app.user.id == comment.user.id %}
+							<a href="{{ path('public_route_comment_remove', { id: comment.id }) }}">Remove</a>
+						{% endif %}
+					</div>
 				</div>
-
-				<div>{{ comment.content }}</div>
-
-				<div>{{ comment.createdAt|date }}</div>
-
-				{% if app.user.id == comment.user.id %}
-					<a href="{{ path('public_route_comment_remove', { id: comment.id }) }}">Remove</a>
-				{% endif %}
-			</div>
-		{% endfor %}
+			{% endfor %}
+		</div>
 	</div>
-
-	{{ render(controller('App\\Controller\\CommentsController::addAction', { id: activity.id })) }}
 {% endif %}

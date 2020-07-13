@@ -72,6 +72,10 @@ a {
 	margin: 20px 0;
 }
 
+.left-column-content form[name="comment_add"] {
+	display: block;
+}
+
 .left-column-content form label {
 	font-size: 14px;
 	white-space: nowrap;
@@ -102,6 +106,20 @@ a {
 	font-size: 11px;
 	cursor: pointer;
 	font-weight: 700;
+}
+
+.left-column-content form button[type="submit"]:focus {
+	outline: none;
+}
+
+.left-column-content form textarea {
+	width: calc(100% - 6px);
+	height: 50px;
+	resize: none;
+}
+
+.left-column-content form textarea:focus {
+	outline: none;
 }
 
 .left-column-content .sign-up-message {
@@ -470,7 +488,7 @@ a {
 	grid-gap: 5px;
 	padding: 5px;
 	background: #ddd;
-	font-size: 14px;
+	font-size: 12px;
 	cursor: default;
 }
 
@@ -549,4 +567,50 @@ a {
 .default-form-submit-row button:hover {
 	background: #252525;
 	color: #fff;
+}
+
+form[name="comment_add"] {
+	margin: 5px 0 15px;
+}
+
+.user-route-comments-section {
+	height: 17vh;
+	overflow-y: auto;
+}
+
+.user-route-comment-container {
+	width: 98%;
+	display: grid;
+	grid-template-columns: min-content auto;
+	align-items: center;
+	grid-gap: 0 10px;
+}
+
+.user-route-comment-container .user-avatar {
+	width: 50px;
+	border-radius: 100px;
+}
+
+.user-route-comment-container .user-name {
+	font-size: 20px;
+	cursor: default;
+	font-weight: 300;
+}
+
+.user-route-comment-container .comment-content,
+.user-route-comment-container .comment-info {
+	grid-column: 2 / 3;
+	font-size: 11px;
+	cursor: default;
+}
+
+.user-route-comment-container .comment-content {
+	background: #efefef;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+.user-route-comment-container .comment-info {
+	margin-top: 3px;
+	color: #999;
 }
